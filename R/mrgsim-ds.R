@@ -52,17 +52,17 @@ as_mrgsim_ds <- function(x, id = NULL, verbose = FALSE, gc = TRUE) {
   ans$files <- ans$ds$files
   ans$hash <- character(0)
   ans$mod <- x@mod
-  ans$variables <- c(x@request, x@outnames)
   ans$dim <- dim(ans$ds)
   n <- min(10, ans$dim[1L])
   ans$head <- x@data[seq(n),]
   ans$names <- names(ans$head)
+  ans$variables <- intersect(c(x@request, x@outnames), ans$names)
   ans$pid <- Sys.getpid()
   ans$gc <- isTRUE(gc)
   ans$address <- obj_addr(ans)
-
-  rm(x)
   
+  rm(x)
+
   if(isTRUE(ans$gc)) {
     set_finalizer_ds(ans)
   }

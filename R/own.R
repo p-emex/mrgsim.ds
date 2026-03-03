@@ -219,10 +219,10 @@ copy_ds <- function(x, own = TRUE) {
   ans$ds <- open_dataset(x$files)
   ans$files <- ans$ds$files
   ans$mod <- x$mod
-  ans$variables <- x$variables
   ans$dim <- x$dim
   ans$head <- x$head
   ans$names <- x$names
+  ans$variables <- x$variables
   ans$pid <- Sys.getpid()
   ans$gc <- x$gc
   ans$address <- obj_addr(ans)
