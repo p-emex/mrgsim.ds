@@ -25,8 +25,12 @@ NULL
 assign("file.prefix", "mrgsims-ds-", .global)
 assign("file.re", "^mrgsims-ds-.*\\.parquet$", .global)
 assign("nullptr", new("externalptr"), .global)
+assign("trashcan", file.path(tempdir(), "mrgsim-ds-trashcan"), .global)
 
-
+.onLoad <- function(libname, pkgname) {
+  assign("trashcan", file.path(tempdir(), "mrgsim-ds-trashcan"), .global) 
+  dir.create(.global$trashcan)
+}
 
 #' @section Package-wide options:
 #' 

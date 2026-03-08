@@ -40,7 +40,6 @@ check_files_fatal <- function(x) {
 #' 
 #' @examples
 #' file_ds()
-#' file_ds("example")
 #' 
 #' @export
 file_ds <- function(id = NULL) {

@@ -18,6 +18,5 @@ Create an output file name
 }
 \examples{
 file_ds()
-file_ds("example")
 
 }
