@@ -30,7 +30,7 @@ test_that("ok to reduce", {
   bb <- copy_ds(b)
   bb$files <- 'a'
   x <- list(a,bb,c)
-  expect_error(reduce_ds(x), "data set files do not exist")
+  expect_error(reduce_ds(x), "parquet files do not exist")
   
   bb <- copy_ds(b)
   bb$files <- a$files

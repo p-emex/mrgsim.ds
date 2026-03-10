@@ -242,7 +242,7 @@ clean_up_trash <- function() {
 #' @export
 copy_ds <- function(x, own = TRUE) {
   require_ds(x)
-  names_in <- names(x)
+  ls_in <- ls(x)
   ans <- new.env(parent = emptyenv())
   ans$ds <- open_dataset(x$files)
   ans$files <- ans$ds$files
@@ -256,12 +256,12 @@ copy_ds <- function(x, own = TRUE) {
   ans$gc_notify <- x$gc_notify
   ans$address <- obj_addr(ans)
   class(ans) <- c("mrgsimsds", "environment")
-  names_out <- names(ans)
-  stopifnot("bad copy" = identical(names_in, names_out))
   if(own) {
     take_ownership(ans)
   } else {
     hash_files(ans)  
   }
+  ls_out <- ls(ans)
+  stopifnot("bad copy" = identical(ls_in, ls_out))
   ans
 }

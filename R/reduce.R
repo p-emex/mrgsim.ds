@@ -27,6 +27,15 @@ simlist_reduce_ok <- function(x) {
       call = caller_env()
     )
   }
+  if(!all(file.exists(files))) {
+    n <- length(files)
+    ne <- sum(!file.exists(files))
+    msg <- glue("{ne} of {n} parquet files do not exist.")
+    abort(
+      message = msg, 
+      call = caller_env()
+    )
+  }
   can_own <- simlist_can_own(x)
   if(!all(can_own)) {
     abort(
@@ -86,7 +95,6 @@ reduce_ds.mrgsimsds <- function(x, ...) {
 #' @export
 reduce_ds.list <- function(x, ...) {
   simlist_reduce_ok(x)
-  x <- refresh_ds(x)
   files <- simlist_files(x)
   ans <- copy_ds(x[[1]], own = TRUE)
   run_gc <- isTRUE(ans$gc)
