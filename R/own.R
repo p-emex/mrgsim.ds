@@ -183,7 +183,7 @@ take_ownership <- function(x) {
   l2 <- as.list(x$files)
   names(l2) <- x$hash
   list2env(l2, envir = hash2file)
-
+  
   return(invisible(x))
 }
 
@@ -205,16 +205,21 @@ send_to_trash <- function(x) {
 
 clean_up_trash <- function() {
   f <- list.files(.global$trashcan, full.names = TRUE)
-  if(!length(f)) return()
-  trash <- sapply(f, readLines)
-  f <- f[!file.exists(trash)]
-  if(!length(f)) return()
-  bf <- basename(f)
-  to_rm <- bf[bf %in% names(hash2addr)]
-  rm(list = to_rm, envir = hash2addr)
-  to_rm <- bf[bf %in% names(hash2file)]
-  rm(list = to_rm, envir = hash2file)
+  if(!length(f)) return(NULL)
+  trashed <- sapply(f, readLines)
+  f <- f[!file.exists(trashed)]
+  if(!length(f)) return(NULL)
+  hash <- basename(f)
+  to_rm <- hash[hash %in% names(hash2addr)]
+  if(length(to_rm)) {
+    rm(list = to_rm, envir = hash2addr)
+  }
+  to_rm <- hash[hash %in% names(hash2file)]
+  if(length(to_rm)) {
+    rm(list = to_rm, envir = hash2file)
+  }
   unlink(f, recursive = TRUE)
+  return(NULL)
 }
 
 #' Copy an mrgsimsds object
