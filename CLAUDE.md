@@ -1,0 +1,66 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## What This Package Does
+
+**mrgsim.ds** is an Apache Arrow-backed simulation output package for mrgsolve. It stores simulation outputs as Parquet files on disk (in `tempdir()`) rather than in-memory data frames, dramatically reducing memory footprint for large pharmacokinetic/pharmacodynamic simulations while enabling high-performance summarization via dplyr verbs.
+
+## Common Commands
+
+All via `make` from the repo root:
+
+```bash
+make doc        # Regenerate roxygen documentation (run after editing @-tags)
+make test       # Run testthat tests
+make check      # R CMD check (skips vignettes)
+make build      # Build package tarball
+make install    # Install from tarball
+make readme     # Render README.Rmd → README.md
+```
+
+Run a single test file from R:
+```r
+testthat::test_file("tests/testthat/test-own.R")
+```
+
+## Architecture
+
+### Core Object: `mrgsimsds` (an R environment)
+
+The central object is not a data frame — it's a lightweight environment with fields:
+- `$ds` — Arrow Dataset (lazy pointer to parquet files on disk)
+- `$files` — paths to parquet files
+- `$hash` — xxh3_64 hashes of those files (used by the ownership system)
+- `$pid` — process ID where the object was created
+- `$gc` — whether files are auto-deleted on GC finalization
+
+### Ownership System (`R/own.R`)
+
+Two package-level hash environments (`hash2addr`, `hash2file`) map file hashes to object memory addresses. Only the "owner" of a file can move or delete it. Ownership transfers via `take_ownership()` / `disown()`. Files auto-delete on GC only if owned. This prevents accidental deletion when objects are copied or passed between contexts.
+
+### Process Safety (`R/refresh.R`, `R/utils.R`)
+
+Objects track `$pid` (creation process). Arrow Dataset pointers become invalid across forked processes. `refresh_ds()` rebuilds the pointer from the file paths. The GC finalizer only runs in the original process to avoid double-deletes during parallel simulations.
+
+### Key Source Files
+
+| File | Responsibility |
+|------|---------------|
+| `R/mrgsim-ds.R` | `mrgsim_ds()`, `as_mrgsim_ds()`, core S3 methods |
+| `R/own.R` | Ownership system: claim, transfer, disown |
+| `R/files.R` | `move_ds()`, `rename_ds()`, `write_ds()` |
+| `R/wrapper.R` | `mread_ds()` and friends — mrgsolve model loading |
+| `R/collect.R` | Coercion to tibble, Arrow table, DuckDB |
+| `R/verbs.R` | dplyr S3 methods (filter, mutate, summarise, etc.) |
+| `R/reduce.R` | `reduce_ds()` — combines a list of outputs |
+| `R/refresh.R` | `refresh_ds()` — rebuild Arrow pointer post-fork |
+| `R/temp.R` | `list_temp()`, `retain_temp()`, `purge_temp()` |
+
+### File Naming Convention
+
+Parquet files are written to `tempdir()` with the pattern:
+```
+mrgsims-ds-{id}-{index}.parquet
+```
+e.g., `mrgsims-ds-out2-0001.parquet`
