@@ -21,10 +21,9 @@ reference:
 - title: S3 Methods
   desc: Work with `mrgsim_ds()` output.
   contents:
-  - head.mrgsimsds
-  - tail.mrgsimsds
-  - dim.mrgsimsds
-  - names.mrgsimsds
+  - mrgsimsds-methods
+  - print.mrgsimsds
+  - mrgsimsds-verbs
 - title: Move or rename outputs
   contents:
   - move_ds
@@ -48,7 +47,6 @@ reference:
   - refresh_ds
   - gc_ds
   - prune_ds
-  - gc_ds
 - title: Manage simulation outputs in `tempdir()`
   contents:
   - list_temp

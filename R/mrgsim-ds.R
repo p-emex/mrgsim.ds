@@ -33,8 +33,13 @@ as_mrgsim_ds <- function(x, verbose = FALSE, gc = TRUE) {
   verbose <- isTRUE(verbose)
   
   if(verbose) message("Writing dataset [2/3].")
-  stopifnot(mread_with_ds(x@mod))
-  stopifnot(inherits(x, "mrgsims"))
+  
+  if(!mread_with_ds(x@mod)) {
+    abort("model was not loaded with `mread_ds()` or equivalent.")
+  }
+  if(!inherits(x, "mrgsims")) {
+    abort("`x` must be an `mrgsims` object.")
+  }
   
   dir <- get_mread_tempdir(x@mod)
 
@@ -64,9 +69,7 @@ as_mrgsim_ds <- function(x, verbose = FALSE, gc = TRUE) {
   
   rm(x)
 
-  if(isTRUE(ans$gc)) {
-    set_finalizer_ds(ans)
-  }
+  set_finalizer_ds(ans)
 
   class(ans) <- c("mrgsimsds", "environment")
   

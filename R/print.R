@@ -22,9 +22,8 @@ print.mrgsimsds <- function(x, n = 8, ...) { # nocov start
   dm1 <- dm[1L]
   if(dm1 < 99999) {
     dm1 <- format(dm1, scientific = FALSE,  big.mark = ',')
-  }
-  if(dm1 > 99999) {
-    dm1 <- format_big()(dm1)  
+  } else {
+    dm1 <- format_big()(dm1)
   }
   owner <- check_ownership(x)
   own <- ifelse(owner, "yes", "no")
@@ -43,5 +42,5 @@ print.mrgsimsds <- function(x, n = 8, ...) { # nocov start
     refresh_ds(x)
     message("[mrgsim.ds] pointer and source pid refreshed.")
   }
-  return(invisible(NULL))
+  return(invisible(x))
 } # nocov end
