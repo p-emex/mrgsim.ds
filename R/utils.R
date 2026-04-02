@@ -1,8 +1,19 @@
 #' Check if object inherits mrgsimsds
 #'
-#' @param x object to check. 
-#' 
-#' 
+#' @param x object to check.
+#'
+#' @return
+#' `TRUE` if `x` inherits from `mrgsimsds`; `FALSE` otherwise.
+#'
+#' @examples
+#' mod <- house_ds()
+#'
+#' out <- mrgsim_ds(mod, events = ev(amt = 100))
+#'
+#' is_mrgsimsds(out)
+#'
+#' is_mrgsimsds(list())
+#'
 #' @export
 is_mrgsimsds <- function(x) {
   inherits(x, "mrgsimsds")  
@@ -27,8 +38,15 @@ format_big <- function() {
   )
 }
 #' Save information about the R process that loaded a model
-#' 
-#' @param x a model object. 
+#'
+#' Stamps the model object with the current process ID and `tempdir()` path so
+#' that [mrgsim_ds()] knows where to write output files. This is called
+#' automatically by [mread_ds()], [house_ds()], and the other model-loading
+#' wrappers. Call it directly only when you load a model through the base
+#' mrgsolve functions (e.g. [mrgsolve::mread()]) and still want to use
+#' [mrgsim_ds()].
+#'
+#' @param x a model object.
 #' 
 #' @return 
 #' An updated model object suitable for using with [mrgsim_ds()].

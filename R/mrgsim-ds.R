@@ -127,8 +127,11 @@ mrgsim_ds <- function(x,  ..., tags = list(), verbose = FALSE,
 }
 
 #' Interact with mrgsimsds objects
-#' 
-#' @param x an mrgsimsds object, output from 
+#'
+#' Basic S3 methods for inspecting and plotting mrgsimsds objects: `dim()`,
+#' `head()`, `tail()`, `names()`, and `plot()`.
+#'
+#' @param x an mrgsimsds object, output from
 #' [mrgsim_ds()] or [as_mrgsim_ds()].
 #' @param y a formula for plotting simulated data; if not provided, all 
 #' columns will be plotted. 
@@ -162,7 +165,13 @@ mrgsim_ds <- function(x,  ..., tags = list(), verbose = FALSE,
 #' nrow(out)
 #' ncol(out)
 #' plot(out, ~ CP + RESP, nid = 10)
-#' 
+#'
+#' @return
+#' - `dim()`: integer vector of length 2 (rows, cols).
+#' - `head()`, `tail()`: a tibble of the first or last `n` rows.
+#' - `names()`: character vector of column names.
+#' - `plot()`: a plot object, returned invisibly.
+#'
 #' @name mrgsimsds-methods
 #' @export
 dim.mrgsimsds <- function(x) {

@@ -16,7 +16,9 @@ A single mrgsimsds object. For the list method, the returned object
 will own all underlying files.
 }
 \description{
-Reduce a list of mrgsimsds objects into a single object
+Combines a list of mrgsimsds objects — typically the replicate outputs from
+a parallel simulation — into one object backed by all of their parquet files.
+Ownership of every file is transferred to the new object.
 }
 \details{
 When \code{x} is a list, a new object is created and returned. This new object

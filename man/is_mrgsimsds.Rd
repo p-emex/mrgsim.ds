@@ -9,6 +9,19 @@ is_mrgsimsds(x)
 \arguments{
 \item{x}{object to check.}
 }
+\value{
+\code{TRUE} if \code{x} inherits from \code{mrgsimsds}; \code{FALSE} otherwise.
+}
 \description{
 Check if object inherits mrgsimsds
+}
+\examples{
+mod <- house_ds()
+
+out <- mrgsim_ds(mod, events = ev(amt = 100))
+
+is_mrgsimsds(out)
+
+is_mrgsimsds(list())
+
 }

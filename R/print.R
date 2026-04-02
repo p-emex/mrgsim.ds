@@ -1,3 +1,18 @@
+#' Print an mrgsimsds object
+#'
+#' @param x an mrgsimsds object.
+#' @param n number of rows to show from the cached head data.
+#' @param ... not used.
+#'
+#' @return `x` invisibly.
+#'
+#' @examples
+#' mod <- house_ds(end = 24)
+#'
+#' out <- mrgsim_ds(mod, events = ev(amt = 100))
+#'
+#' print(out)
+#'
 #' @export
 #' @md
 print.mrgsimsds <- function(x, n = 8, ...) { # nocov start

@@ -12,7 +12,7 @@
 #' @importFrom mrgsolve mread mcode mread_cache modlib house
 #' @importFrom mrgsolve plot_sims is.mrgmod
 #' @importFrom methods new
-#' @importFrom fs file_move dir_exists dir_create file_delete path_norm
+#' @importFrom fs file_move file_copy dir_exists dir_create file_delete path_norm
 #' @importFrom stats as.formula
 #' @importFrom lobstr obj_addr
 #' @importFrom digest getVDigest

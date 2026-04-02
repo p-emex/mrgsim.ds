@@ -27,7 +27,9 @@ An mrgsimsds object or a list of those objects is returned, potentially
 with the \code{gc} status updated.
 }
 \description{
-Set collection status for mrgsimsds objects
+Controls whether the underlying parquet files are automatically deleted
+when the object is garbage collected. Set \code{value = FALSE} to protect files
+from cleanup; set back to \code{TRUE} to re-enable automatic deletion.
 }
 \examples{
 mod <- modlib_ds("popex", outvars = "IPRED")

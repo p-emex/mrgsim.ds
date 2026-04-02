@@ -71,13 +71,14 @@ as.data.frame.mrgsimsds <- function(x, row.names = NULL, optional = FALSE, ...) 
 }
 
 #' Coerce an mrgsimsds object to an arrow data set
-#' 
-#' @param x an mrgsimsds object or a list of mrgsimsds objects. 
-#' @param ... not used. 
-#' 
-#' @details
-#' The method for list will retain only list positions containing an `mrgsimsds`
-#' object. A single data set object is returned.
+#'
+#' Extracts the underlying [arrow::Dataset] from an mrgsimsds object, allowing
+#' you to work directly with the Arrow API or pass the dataset to other
+#' Arrow-aware tools. For a list, only `mrgsimsds` elements are retained and
+#' a single dataset spanning all their files is returned.
+#'
+#' @param x an mrgsimsds object or a list of mrgsimsds objects.
+#' @param ... not used.
 #' 
 #' @examples
 #' mod <- house_ds(end = 5)

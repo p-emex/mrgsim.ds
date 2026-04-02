@@ -47,7 +47,11 @@ simlist_reduce_ok <- function(x) {
 
 
 #' Reduce a list of mrgsimsds objects into a single object
-#' 
+#'
+#' Combines a list of mrgsimsds objects — typically the replicate outputs from
+#' a parallel simulation — into one object backed by all of their parquet files.
+#' Ownership of every file is transferred to the new object.
+#'
 #' @param x a list of mrgsimsds objects or a single mrgsimsds object.
 #' @param ... not used.
 #' 

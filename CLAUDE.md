@@ -56,6 +56,19 @@ Objects track `$pid` (creation process). Arrow Dataset pointers become invalid a
 | `R/reduce.R` | `reduce_ds()` — combines a list of outputs |
 | `R/refresh.R` | `refresh_ds()` — rebuild Arrow pointer post-fork |
 | `R/temp.R` | `list_temp()`, `retain_temp()`, `purge_temp()` |
+| `R/gc.R` | `gc_ds()` — toggle GC/auto-delete and notify flags |
+| `R/prune.R` | `prune_ds()` — filter a list to only mrgsimsds objects |
+| `R/simlist.R` | Internal helpers for working with lists of mrgsimsds objects |
+
+### Package-level State (`R/AAA.R`)
+
+A `.global` environment holds package-wide constants and state:
+- `file.prefix` — `"mrgsims-ds-"` (prefix for all parquet files)
+- `file.re` — regex to identify package-managed files
+- `nullptr` — sentinel `externalptr` used to detect invalidated Arrow pointers
+- `trashcan` — a subdirectory of `tempdir()` used as staging area before file deletion
+
+Option `mrgsim.ds.show.gc` (set via `options()`) prints messages when GC removes files — useful for debugging ownership/cleanup issues.
 
 ### File Naming Convention
 

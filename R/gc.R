@@ -1,5 +1,9 @@
 #' Set collection status for mrgsimsds objects
-#' 
+#'
+#' Controls whether the underlying parquet files are automatically deleted
+#' when the object is garbage collected. Set `value = FALSE` to protect files
+#' from cleanup; set back to `TRUE` to re-enable automatic deletion.
+#'
 #' @param x a list of mrgsimsds objects or a single mrgsimsds object.
 #' @param value logical; if `TRUE` the underlying files will be cleaned up.
 #' @param notify logical; if `TRUE` a message will be issued when files are 

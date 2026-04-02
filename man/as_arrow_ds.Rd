@@ -15,11 +15,10 @@ as_arrow_ds(x, ...)
 An 'Apache' 'Arrow' \link[arrow:Dataset]{arrow::Dataset} object.
 }
 \description{
-Coerce an mrgsimsds object to an arrow data set
-}
-\details{
-The method for list will retain only list positions containing an \code{mrgsimsds}
-object. A single data set object is returned.
+Extracts the underlying \link[arrow:Dataset]{arrow::Dataset} from an mrgsimsds object, allowing
+you to work directly with the Arrow API or pass the dataset to other
+Arrow-aware tools. For a list, only \code{mrgsimsds} elements are retained and
+a single dataset spanning all their files is returned.
 }
 \examples{
 mod <- house_ds(end = 5)

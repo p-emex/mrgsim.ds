@@ -46,8 +46,17 @@ columns will be plotted.}
 
 \item{.dots}{a list of items to pass to \code{\link[mrgsolve:plot_sims]{mrgsolve::plot_sims()}}.}
 }
+\value{
+\itemize{
+\item \code{dim()}: integer vector of length 2 (rows, cols).
+\item \code{head()}, \code{tail()}: a tibble of the first or last \code{n} rows.
+\item \code{names()}: character vector of column names.
+\item \code{plot()}: a plot object, returned invisibly.
+}
+}
 \description{
-Interact with mrgsimsds objects
+Basic S3 methods for inspecting and plotting mrgsimsds objects: \code{dim()},
+\code{head()}, \code{tail()}, \code{names()}, and \code{plot()}.
 }
 \details{
 \code{head()} and \code{tail()} only look at the first and last \code{file} in the data

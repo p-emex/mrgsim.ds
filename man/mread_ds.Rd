@@ -22,6 +22,10 @@ mread_cache_ds(...)
 \arguments{
 \item{...}{passed to the corresponding mrgsolve function.}
 }
+\value{
+A model object with process information saved, suitable for use with
+\code{\link[=mrgsim_ds]{mrgsim_ds()}}.
+}
 \description{
 These are very-light wrappers around mrgsolve functions used to load
 models for simulation.

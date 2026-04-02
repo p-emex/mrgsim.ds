@@ -7,12 +7,16 @@
 #' @param ... passed to the corresponding mrgsolve function.
 #' 
 #' @seealso [save_process_info()].
-#' 
+#'
+#' @return
+#' A model object with process information saved, suitable for use with
+#' [mrgsim_ds()].
+#'
 #' @examples
 #' mod <- house_ds()
-#' 
+#'
 #' mod
-#' 
+#'
 #' @export
 mread_ds <- function(...) {
   x <- mread(...)
