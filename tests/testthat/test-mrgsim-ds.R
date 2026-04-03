@@ -59,3 +59,4 @@ test_that("copy an object", {
   o2$ds <- collect(out2)
   expect_identical(o1, o2)
 })
+mrgsim.ds:::teardown_ds()

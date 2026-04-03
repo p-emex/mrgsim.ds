@@ -39,18 +39,16 @@ test_that("send to trash", {
   out <- list(mrgsim_ds(mod), mrgsim_ds(mod))
   out <- reduce_ds(out)
   
-  f <- list.files(glo$trashcan)
-  unlink(f, recursive = TRUE)
+  gc()
+  before_hashes <- list.files(glo$trashcan)
   mrgsim.ds:::clean_up_ds(out)
-  
-  expect_setequal(out$hash, list.files(glo$trashcan)) 
-  
-  l <- list.files(glo$trashcan, full.names = TRUE)
+  new_hashes <- setdiff(list.files(glo$trashcan), before_hashes)
+
+  expect_setequal(out$hash, new_hashes)
+
+  l <- file.path(glo$trashcan, new_hashes)
   f <- unname(sapply(l, readLines))
-  
-  f <- sort(basename(f))
-  files <- sort(basename(out$files))
-  
+
   expect_setequal(basename(f), basename(out$files))
   
   out <- mrgsim_ds(mod)
@@ -63,3 +61,4 @@ test_that("send to trash", {
 
 
 rm(mod)
+mrgsim.ds:::teardown_ds()

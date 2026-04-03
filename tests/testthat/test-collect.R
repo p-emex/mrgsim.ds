@@ -32,3 +32,4 @@ test_that("duck_db", {
 })
 
 rm(mod)
+mrgsim.ds:::teardown_ds()

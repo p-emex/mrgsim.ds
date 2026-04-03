@@ -4,8 +4,15 @@ hash2file <- new.env(parent = emptyenv(), hash = TRUE, size = 5000L)
 digest_algo <- "xxh3_64"
 
 clear_ownership <- function() {
-  rm(list = names(hash2addr), envir = hash2addr)  
+  rm(list = names(hash2addr), envir = hash2addr)
   rm(list = names(hash2file), envir = hash2file)
+}
+
+teardown_ds <- function() {
+  gc()
+  purge_temp(quietly = TRUE)
+  clear_ownership()
+  unlink(list.files(.global$trashcan, full.names = TRUE))
 }
 
 # This code needs to check pid_changed on the model object, 
@@ -264,6 +271,7 @@ copy_ds <- function(x, own = TRUE) {
   ans$variables <- x$variables
   ans$pid <- Sys.getpid()
   ans$gc <- x$gc
+  ans$gc_locked <- x$gc_locked
   ans$gc_notify <- x$gc_notify
   ans$address <- obj_addr(ans)
   set_finalizer_ds(ans)

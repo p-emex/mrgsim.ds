@@ -51,3 +51,4 @@ test_that("copy ds", {
 })
 
 rm(mod, out)
+mrgsim.ds:::teardown_ds()

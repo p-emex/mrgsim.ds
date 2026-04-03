@@ -57,7 +57,7 @@ test_that("rename_ds", {
 test_that("write_ds", {
   out <- mrgsim_ds(mod)
   write_ds(out, file.path(tempdir(), "test-write-single"))
-  expect_false(out$gc)
+  expect_true(out$gc)
   expect_equal(basename(out$files), "test-write-single")
   tmp <- basename(tempdir())
   tst <- basename(dirname(out$files))
@@ -122,3 +122,4 @@ test_that("temp file helpers", {
 })
 
 rm(mod)
+mrgsim.ds:::teardown_ds()

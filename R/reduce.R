@@ -104,6 +104,8 @@ reduce_ds.list <- function(x, ...) {
   ans$ds <- open_dataset(sources = files)
   ans$files <- ans$ds$files
   ans$dim <- dim(ans$ds)
+  ans$gc_locked <- FALSE
+  set_gc_auto(ans)
   take_ownership(ans)
   ans
 }

@@ -25,3 +25,4 @@ test_that("mrgsolve wrappers", {
   expect_is(x, "mrgmod")
   expect_equal(x$rtol, 1e-2)
 })
+mrgsim.ds:::teardown_ds()

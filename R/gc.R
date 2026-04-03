@@ -1,3 +1,22 @@
+in_tempdir <- function(files) {
+  all(grepl(basename(tempdir()), files, fixed = TRUE))
+}
+
+set_gc_auto <- function(x) {
+  if(isTRUE(x$gc_locked)) {
+    if(isTRUE(x$gc) && !in_tempdir(x$files)) {
+      warning(
+        "gc is locked to TRUE but files are outside tempdir(); ",
+        "files may be auto-deleted on garbage collection.",
+        call. = FALSE
+      )
+    }
+    return(invisible(x))
+  }
+  x$gc <- in_tempdir(x$files)
+  invisible(x)
+}
+
 #' Set garbage collection behavior for mrgsimsds objects
 #'
 #' @description
@@ -47,7 +66,8 @@ gc_ds <- function(x, ..., value = NULL, notify = NULL) UseMethod("gc_ds")
 #' @export
 gc_ds.mrgsimsds <- function(x, value = NULL, notify = NULL, ...) {
   if(is.logical(value) && length(value)) {
-    x$gc <- value[[1]]  
+    x$gc <- value[[1]]
+    x$gc_locked <- TRUE
   }
   if(is.logical(notify) && length(notify)) {
     x$gc_notify <- notify[[1]]  

@@ -63,6 +63,7 @@ as_mrgsim_ds <- function(x, verbose = FALSE, gc = TRUE) {
   ans$variables <- intersect(c(x@request, x@outnames), ans$names)
   ans$pid <- Sys.getpid()
   ans$gc <- isTRUE(gc)
+  ans$gc_locked <- FALSE
   ans$gc_notify <- FALSE
   ans$address <- obj_addr(ans)
   

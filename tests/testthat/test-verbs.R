@@ -78,3 +78,4 @@ test_that("pull works on mrgsimsds", {
 })
 
 rm(out, mod, data)
+mrgsim.ds:::teardown_ds()

@@ -28,3 +28,4 @@ test_that("check if pid changed", {
   out <- mrgsim_ds(mod)
   expect_false(mrgsim.ds:::pid_changed(out))
 })
+mrgsim.ds:::teardown_ds()

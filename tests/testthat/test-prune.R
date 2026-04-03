@@ -32,3 +32,4 @@ test_that("prune list object - drop", {
   expect_length(ans, 0)
 })
 
+mrgsim.ds:::teardown_ds()

@@ -114,10 +114,8 @@ move_ds <- function(x, path) {
     dir_create(path)  
   }
   x$files <- file_move(files, path)
-  if(!grepl(basename(tempdir()), path)) {
-    x$gc <- FALSE
-  }
   x <- refresh_ds(x)
+  set_gc_auto(x)
   take_ownership(x)
   invisible(x)
 }
@@ -160,9 +158,9 @@ write_ds <- function(x, sink, ...) {
     write_parquet(x$ds, sink, ...)
     if(owner) unlink(x$ds$files, recursive = TRUE)
   }
-  x$gc <- FALSE
   x$files <- sink
   x <- refresh_ds(x)
+  set_gc_auto(x)
   take_ownership(x)
   invisible(x)
 }

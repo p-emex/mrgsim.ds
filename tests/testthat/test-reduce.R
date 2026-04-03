@@ -69,3 +69,4 @@ test_that("can't reduce if one file is owned by another object", {
 })
 
 rm(mod)
+mrgsim.ds:::teardown_ds()

@@ -20,3 +20,4 @@ test_that("refresh invalid pointers", {
   v <- sapply(l, mrgsim.ds:::invalid_ds)  
   expect_all_false(v)
 })
+mrgsim.ds:::teardown_ds()
