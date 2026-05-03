@@ -69,7 +69,7 @@ assign("nullptr", new("externalptr"), .global)
 #' - Move or rename files
 #'   - [rename_ds()]
 #'   - [move_ds()]
-#'   - [write_ds()]
+#'   - [collect_ds()]
 #'
 #' - Ownership
 #'   - [ownership()]

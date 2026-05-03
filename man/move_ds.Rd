@@ -3,14 +3,14 @@
 \name{move_ds}
 \alias{move_ds}
 \alias{rename_ds}
-\alias{write_ds}
-\title{Move, rename, or write out data set files}
+\alias{combine_ds}
+\title{Move, rename, combine files in mrgsimsds objects}
 \usage{
 move_ds(x, path)
 
 rename_ds(x, id)
 
-write_ds(x, sink, ...)
+combine_ds(x)
 }
 \arguments{
 \item{x}{an mrgsimsds object.}
@@ -19,43 +19,29 @@ write_ds(x, sink, ...)
 
 \item{id}{a short name used to create data set files for the simulated
 output.}
-
-\item{sink}{the complete path (including file name) for a single parquet
-file containing all simulated data; passed to \code{\link[arrow:write_parquet]{arrow::write_parquet()}}.}
-
-\item{...}{passed to \code{\link[arrow:write_parquet]{arrow::write_parquet()}}; files are always written
-in parquet format.}
 }
 \value{
 All three functions return \code{x} invisibly. The updated file list is
 accessible via \code{x$files}.
 }
 \description{
-Use \code{move_ds()} to change the enclosing directory. \code{write_ds()} can also
-move the files, but it always condenses the simulation output into a single
-parquet file if multiple files are backing the mrgsimsds object. All
-operations are made on the object in place.
-
-There is an important distinction between \code{write_ds()} and \code{move_ds()} or
-\code{rename_ds()} for multi-file objects. The backing files can be moved or
-renamed with little computational effort. For multi-file simulation outputs,
-\code{write_ds()} will need to read each file and write the data out to a single
-file. Apache Arrow can do this very efficiently, but there will still be an
-additional, potentially noticeable computational effort.
+Use \code{move_ds()} to change the enclosing directory. \code{rename_ds()}
+keeps the files in place, but changes the file names. \code{combine_ds()}
+brings simulated data from multiple backing file into a single file.
 \subsection{Automatic gc adjustment}{
 
-Both \code{move_ds()} and \code{write_ds()} automatically update the gc flag based on
+Both \code{move_ds()} automatically updates the gc flag based on
 where the files end up: files that remain under \code{tempdir()} keep
 \code{gc = TRUE}; files moved outside \code{tempdir()} get \code{gc = FALSE}, protecting
-them from automatic deletion. \code{rename_ds()} never changes the gc flag
-because it does not change the file location.
+them from automatic deletion. Neither \code{rename_ds()} nor \code{collect_ds()} never
+changes the gc flag because they do not change the file location.
 
 This automatic adjustment is skipped if the gc setting has been locked by a
 prior call to \code{\link[=gc_ds]{gc_ds()}}. A warning is issued if gc is locked to \code{TRUE} but
 files land outside \code{tempdir()}.
 
 The object (\code{x}) is required to own the underlying files in order to move
-or rename them; ownership is not required for \code{write_ds()}.
+or rename them.
 
 All three functions modify \code{x} in place and file ownership stays with \code{x}.
 }
@@ -68,16 +54,12 @@ out <- lapply(1:3, \(x) { mrgsim_ds(mod, events = ev(amt = 100)) })
 
 out <- reduce_ds(out)
 
-rename_ds(out, id = "example-sims")
+out <- rename(out, "new-name")
 
-basename(out$files)
+out$files
 
-write_ds(out, sink = file.path(tempdir(), "example.parquet"))
+out <- combine_ds(out)
 
-basename(out$files)
-
-\dontrun{
-  move_ds(out, path = "data/simulated") 
-}
+out$files
 
 }

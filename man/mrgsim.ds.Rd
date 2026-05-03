@@ -52,7 +52,7 @@ removed prior to object cleanup.
 \itemize{
 \item \code{\link[=rename_ds]{rename_ds()}}
 \item \code{\link[=move_ds]{move_ds()}}
-\item \code{\link[=write_ds]{write_ds()}}
+\item \code{\link[=collect_ds]{collect_ds()}}
 }
 \item Ownership
 \itemize{

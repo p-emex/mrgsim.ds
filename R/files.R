@@ -41,35 +41,95 @@ file_ds <- function(id = NULL) {
   return(file)
 }
 
-#' Move, rename, or write out data set files
+file_numbers <- function(x) {
+  n <- length(x)
+  width <- floor(log10(n))+1
+  part <- formatC(seq_along(x), width = width, flag = "0")
+  paste0(part, "-", n)
+}
+
+#' Get the current location of mrgsimsds object files
+#' 
+#' @param x an mrgsimsds object.
+current_location <- function(x) {
+  require_ds(x)
+  dirname(x$files[[1]])
+}
+
+
+#' @rdname save_ds
+#' @export
+save_ds <- function(x, file, stay_put = FALSE) {
+  path <- dirname(file)
+  if(isTRUE(stay_put)) {
+    path <- current_location(x)
+  }
+  move <- path != current_location(x)
+  stem <- tools::file_path_sans_ext(file)
+  if(move) {
+    x <- move_ds(x, path)
+  } 
+  path <- current_location(x)
+  if(grepl(basename(tempdir()), path)) {
+    warn("object and files will be saved to tempdir().")
+  }
+  file <- file.path(path, basename(file))
+  reclass <- class(x)
+  x <- as.list(x)
+  x$ds <- .global$nullptr
+  x$files <- basename(x$files)
+  x <- structure(list(x), class = "mrgsimsds_save_ds", reclass = reclass)
+  saveRDS(object = x, file = file)
+  invisible(file)
+}
+
+#' @rdname save_ds
+#' @export
+read_ds <- function(file) {
+  if(!file.exists(file)) abort("`file` does not exist.")
+  cwd <- getwd()
+  on.exit(setwd(cwd), add = TRUE)
+  path <- dirname(file)
+  file <- basename(file)
+  setwd(path)
+  x <- readRDS(file)
+  if(!inherits(x, "mrgsimsds_save_ds")) {
+    abort("[read_ds] unrecognized object in rds file.")
+  }
+  reclass <- attr(x, "reclass")
+  x <- list2env(x[[1]])
+  class(x) <- reclass
+  if(!all(file.exists(x$files))) {
+    abort("[read_ds] one or more files could not be located.")
+  }
+  x$files <- normalizePath(x$files, mustWork = TRUE)
+  x <- refresh_ds(x)
+  x <- copy_ds(x, own = TRUE)
+  x <- gc_ds(x, value = FALSE)
+  invisible(x)
+}
+
+#' Move, rename, combine files in mrgsimsds objects
 #'
 #' @description
-#' Use `move_ds()` to change the enclosing directory. `write_ds()` can also
-#' move the files, but it always condenses the simulation output into a single
-#' parquet file if multiple files are backing the mrgsimsds object. All
-#' operations are made on the object in place.
-#'
-#' There is an important distinction between `write_ds()` and `move_ds()` or
-#' `rename_ds()` for multi-file objects. The backing files can be moved or
-#' renamed with little computational effort. For multi-file simulation outputs,
-#' `write_ds()` will need to read each file and write the data out to a single
-#' file. Apache Arrow can do this very efficiently, but there will still be an
-#' additional, potentially noticeable computational effort.
+#' Use `move_ds()` to change the enclosing directory. `rename_ds()`
+#' keeps the files in place, but changes the file names. `combine_ds()`
+#' brings simulated data from multiple backing file into a single file.
 #'
 #' ## Automatic gc adjustment
 #'
-#' Both `move_ds()` and `write_ds()` automatically update the gc flag based on
+#' Both `move_ds()` automatically updates the gc flag based on
 #' where the files end up: files that remain under `tempdir()` keep
 #' `gc = TRUE`; files moved outside `tempdir()` get `gc = FALSE`, protecting
-#' them from automatic deletion. `rename_ds()` never changes the gc flag
-#' because it does not change the file location.
+#' them from automatic deletion. Neither `rename_ds()` nor `collect_ds()` never 
+#' changes the gc flag because they do not change the file location.
 #'
 #' This automatic adjustment is skipped if the gc setting has been locked by a
 #' prior call to [gc_ds()]. A warning is issued if gc is locked to `TRUE` but
 #' files land outside `tempdir()`.
 #'
 #' The object (`x`) is required to own the underlying files in order to move
-#' or rename them; ownership is not required for `write_ds()`.
+#' or rename them.
 #'
 #' All three functions modify `x` in place and file ownership stays with `x`.
 #'
@@ -77,10 +137,6 @@ file_ds <- function(id = NULL) {
 #' @param path the new directory location for backing files.
 #' @param id a short name used to create data set files for the simulated
 #' output.
-#' @param sink the complete path (including file name) for a single parquet
-#' file containing all simulated data; passed to [arrow::write_parquet()].
-#' @param ... passed to [arrow::write_parquet()]; files are always written
-#' in parquet format.
 #' 
 #' @return
 #' All three functions return `x` invisibly. The updated file list is
@@ -94,17 +150,13 @@ file_ds <- function(id = NULL) {
 #' 
 #' out <- reduce_ds(out)
 #' 
-#' rename_ds(out, id = "example-sims")
+#' out <- rename(out, "new-name")
 #' 
-#' basename(out$files)
+#' out$files
 #' 
-#' write_ds(out, sink = file.path(tempdir(), "example.parquet"))
+#' out <- combine_ds(out)
 #' 
-#' basename(out$files)
-#' 
-#' \dontrun{
-#'   move_ds(out, path = "data/simulated") 
-#' }
+#' out$files
 #' 
 #' @export
 move_ds <- function(x, path) {
@@ -133,11 +185,8 @@ rename_ds <- function(x, id) {
   }
   disown(x)
   files <- x$files
-  i <- seq_along(files)
-  width <- floor(log10(length(i)))+1
-  width <- max(width, 4)
-  i <- formatC(i, width = width, flag = "0")
-  id <- paste0(id, "-", i)
+  parts <- file_numbers(files)
+  id <- paste0(id, "-", parts)
   new_names <- file_ds(id = id)
   x$files <- file_move(files, file.path(dirname(files), new_names))
   x <- refresh_ds(x)
@@ -147,24 +196,21 @@ rename_ds <- function(x, id) {
 
 #' @rdname move_ds
 #' @export
-write_ds <- function(x, sink, ...) {
+combine_ds <- function(x) {
   require_ds(x)
-  owner <- check_ownership(x)
-  if(owner) {
+  if(!check_ownership(x)) {
+    abort("cannot combine files you don't own.")  
+  }
+  if(length(x$files) > 1) {
     disown(x)
-    mv_or_cp <- file_move  
-  } else {
-    mv_or_cp <- file_copy
+    path <- dirname(x$files[1])
+    output <- file.path(path, file_ds())
+    write_parquet(x$ds, output)
+    unlink(x$files, recursive = TRUE)
+    x$files <- output
+    x <- hash_files(x)
   }
-  if(length(x$files)==1) {
-    mv_or_cp(x$files, sink)
-  } else {
-    write_parquet(x$ds, sink, ...)
-    if(owner) unlink(x$ds$files, recursive = TRUE)
-  }
-  x$files <- sink
   x <- refresh_ds(x)
-  set_gc_auto(x)
   take_ownership(x)
   invisible(x)
 }
