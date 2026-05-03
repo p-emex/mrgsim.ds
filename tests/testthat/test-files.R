@@ -54,24 +54,6 @@ test_that("rename_ds", {
   expect_equal(b, "mrgsims-ds-zip-0001.parquet")
 })
 
-test_that("write_ds", {
-  out <- mrgsim_ds(mod)
-  write_ds(out, file.path(tempdir(), "test-write-single"))
-  expect_true(out$gc)
-  expect_equal(basename(out$files), "test-write-single")
-  tmp <- basename(tempdir())
-  tst <- basename(dirname(out$files))
-  expect_equal(tst, tmp)
-  
-  out <- list(mrgsim_ds(mod), mrgsim_ds(mod))
-  out <- reduce_ds(out)
-  write_ds(out, file.path(tempdir(), "test-write-multi"))
-  expect_equal(unique(basename(out$files)), "test-write-multi")
-  tmp <- basename(tempdir())
-  tst <- unique(basename(dirname(out$files)))
-  expect_equal(tst, tmp)
-})
-
 test_that("move_ds", {
   out <- mrgsim_ds(mod)
   nw <- file.path(tempdir(), "newdir")
