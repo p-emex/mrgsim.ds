@@ -30,8 +30,8 @@
 "519","R/own.R","clean_up_trash",219,0
 "200","R/temp.R","list_temp",50,0
 "203","R/temp.R","list_temp",51,0
-"269","R/temp.R","retain_temp",74,0
-"271","R/temp.R","retain_temp",75,0
+"269","R/temp.R","purge_except_temp",74,0
+"271","R/temp.R","purge_except_temp",75,0
 "92","R/utils.R","require_ds",26,0
 "299","R/utils.R","pid_changed",86,0
 "314","R/utils.R","get_mread_pid",93,0

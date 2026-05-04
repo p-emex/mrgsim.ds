@@ -96,6 +96,8 @@ x <- mrgsim(mod, data)
 lobstr::obj_size(x)
 
 dim(x)
+
+rm(x)
 ```
 
 
@@ -167,6 +169,8 @@ This workflow is particularly useful when running replicate simulations in
 parallel, with large outputs
 
 ```{r}
+rm(out)
+
 library(future.apply, quietly = TRUE)
 
 plan(multisession, workers = 5L)
@@ -200,7 +204,7 @@ This directory is eventually removed when the R session ends. Tools are provided
 to manage the space.
 
 ```{r}
-retain_temp(out2)
+purge_except_temp(out2)
 
 list_temp()
 ```
@@ -218,6 +222,8 @@ purge_temp()
 
 ```{r, message = FALSE}
 plan(multisession, workers = 5L)
+
+rm(out2)
 
 out1 <- mrgsim_ds(mod, data)
 rename_ds(out1, "out1")

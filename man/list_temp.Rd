@@ -2,35 +2,35 @@
 % Please edit documentation in R/temp.R
 \name{list_temp}
 \alias{list_temp}
-\alias{retain_temp}
+\alias{purge_except_temp}
 \alias{purge_temp}
 \title{Manage simulated outputs in the per-session temporary directory}
 \usage{
 list_temp(quietly = FALSE)
 
-retain_temp(..., quietly = FALSE)
+purge_except_temp(..., quietly = FALSE)
 
 purge_temp(quietly = FALSE)
 }
 \arguments{
 \item{quietly}{if \code{TRUE}, messages will be suppressed.}
 
-\item{...}{mrgsimsds objects whose files will be retained by \code{retain_temp()};
+\item{...}{mrgsimsds objects whose files will be retained by \code{purge_except_temp()};
 non-mrgsimsds objects are ignored with a warning.}
 }
 \value{
 \code{list_temp()} returns a character vector of file paths invisibly, and prints
 a summary to the console unless \code{quietly = TRUE}.
 
-\code{retain_temp()} and \code{purge_temp()} return \code{NULL} invisibly.
+\code{purge_except_temp()} and \code{purge_temp()} return \code{NULL} invisibly.
 }
 \description{
 Functions for inspecting and cleaning up package-managed parquet files in
-\code{tempdir()}. \code{list_temp()} shows what is present; \code{retain_temp()} removes
+\code{tempdir()}. \code{list_temp()} shows what is present; \code{purge_except_temp()} removes
 everything except the files belonging to specified objects; \code{purge_temp()}
 removes all package-managed files unconditionally.
 
-Note: \code{purge_temp()} and \code{retain_temp()} should not be needed in routine
+Note: \code{purge_temp()} and \code{purge_except_temp()} should not be needed in routine
 usage when simulation output objects are subject to the garbage collector.
 Calling them while active objects still point to those files will cause
 errors on next data access.
@@ -46,7 +46,7 @@ sims <- reduce_ds(out)
 
 list_temp()
 
-retain_temp(sims)
+purge_except_temp(sims)
 
 list_temp()
 
