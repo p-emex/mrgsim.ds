@@ -51,7 +51,7 @@ test_that("rename_ds", {
   a <- basename(out$files)
   rename_ds(out, "zip")
   b <- basename(out$files)
-  expect_equal(b, "mrgsims-ds-zip-0001.parquet")
+  expect_equal(b, "mrgsims-ds-zip-1.parquet")
 })
 
 test_that("move_ds", {

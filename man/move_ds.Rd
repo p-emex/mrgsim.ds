@@ -6,7 +6,7 @@
 \alias{combine_ds}
 \title{Move, rename, combine files in mrgsimsds objects}
 \usage{
-move_ds(x, path)
+move_ds(x, path, quietly = FALSE)
 
 rename_ds(x, id)
 
@@ -54,7 +54,7 @@ out <- lapply(1:3, \(x) { mrgsim_ds(mod, events = ev(amt = 100)) })
 
 out <- reduce_ds(out)
 
-out <- rename(out, "new-name")
+out <- rename_ds(out, "new-name")
 
 out$files
 

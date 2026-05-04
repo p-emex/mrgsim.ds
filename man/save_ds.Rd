@@ -5,7 +5,7 @@
 \alias{read_ds}
 \title{Save and restore an mrgsimsds object}
 \usage{
-save_ds(x, file, stay_put = FALSE)
+save_ds(x, file)
 
 read_ds(file)
 }
@@ -15,10 +15,6 @@ read_ds(file)
 \item{file}{for \code{save_ds()}, the path to the output \code{.rds} file; the
 directory component determines where backing parquet files are moved.
 For \code{read_ds()}, the path to an \code{.rds} file written by \code{save_ds()}.}
-
-\item{stay_put}{if \code{TRUE}, parquet files are left in their current directory
-and the \code{.rds} is written there rather than at the directory implied by
-\code{file}. A warning is issued when the files remain inside \code{tempdir()}.}
 }
 \value{
 \code{save_ds()} returns the path to the written \code{.rds} file, invisibly.
@@ -29,11 +25,10 @@ backing files.
 }
 \description{
 \code{save_ds()} serializes an mrgsimsds object to an \code{.rds} file, moving the
-backing parquet files to the same directory as \code{file} (unless
-\code{stay_put = TRUE}). Parquet filenames are stored as bare basenames inside
-the \code{.rds}, so the \code{.rds} file and its parquet files must stay in the same
-directory to be portable. \strong{Do not restore the file with \code{readRDS()}};
-use \code{read_ds()} instead.
+backing parquet files to the same directory as \code{file}. Parquet filenames
+are stored as bare basenames inside the \code{.rds}, so the \code{.rds} file and its
+parquet files must stay in the same directory to be portable.
+\strong{Do not restore the file with \code{readRDS()}}; use \code{read_ds()} instead.
 
 \code{read_ds()} deserializes a file written by \code{save_ds()}, rebuilds the Arrow
 Dataset pointer, and transfers full ownership of the backing files to the

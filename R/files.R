@@ -44,8 +44,8 @@ file_ds <- function(id = NULL) {
 file_numbers <- function(x) {
   n <- length(x)
   width <- floor(log10(n))+1
-  part <- formatC(seq_along(x), width = width, flag = "0")
-  paste0(part, "-", n)
+  digits <- formatC(seq_along(x), width = width, flag = "0")
+  digits
 }
 
 #' Get the current location of mrgsimsds object files
@@ -56,16 +56,24 @@ current_location <- function(x) {
   dirname(x$files[[1]])
 }
 
+#' Get names of backing files
+#' 
+#' @param x an mrgsimsds object.
+#' 
+#' @export
+files_ds <- function(x) {
+  require_ds(x)
+  x$files
+}
 
 #' Save and restore an mrgsimsds object
 #'
 #' @description
 #' `save_ds()` serializes an mrgsimsds object to an `.rds` file, moving the
-#' backing parquet files to the same directory as `file` (unless
-#' `stay_put = TRUE`). Parquet filenames are stored as bare basenames inside
-#' the `.rds`, so the `.rds` file and its parquet files must stay in the same
-#' directory to be portable. **Do not restore the file with `readRDS()`**;
-#' use `read_ds()` instead.
+#' backing parquet files to the same directory as `file`. Parquet filenames 
+#' are stored as bare basenames inside the `.rds`, so the `.rds` file and its 
+#' parquet files must stay in the same directory to be portable.
+#'  **Do not restore the file with `readRDS()`**; use `read_ds()` instead.
 #'
 #' `read_ds()` deserializes a file written by `save_ds()`, rebuilds the Arrow
 #' Dataset pointer, and transfers full ownership of the backing files to the
@@ -75,9 +83,6 @@ current_location <- function(x) {
 #' @param file for `save_ds()`, the path to the output `.rds` file; the
 #' directory component determines where backing parquet files are moved.
 #' For `read_ds()`, the path to an `.rds` file written by `save_ds()`.
-#' @param stay_put if `TRUE`, parquet files are left in their current directory
-#' and the `.rds` is written there rather than at the directory implied by
-#' `file`. A warning is issued when the files remain inside `tempdir()`.
 #'
 #' @return
 #' `save_ds()` returns the path to the written `.rds` file, invisibly.
@@ -97,11 +102,8 @@ current_location <- function(x) {
 #'
 #' @seealso [move_ds()], [gc_ds()]
 #' @export
-save_ds <- function(x, file, stay_put = FALSE) {
+save_ds <- function(x, file) {
   path <- dirname(file)
-  if(isTRUE(stay_put)) {
-    path <- current_location(x)
-  }
   move <- path != current_location(x)
   stem <- tools::file_path_sans_ext(file)
   if(move) {
@@ -109,14 +111,14 @@ save_ds <- function(x, file, stay_put = FALSE) {
   } 
   path <- current_location(x)
   if(grepl(basename(tempdir()), path)) {
-    warn("object and files will be saved to tempdir().")
+    warn("object and backing files will be saved to tempdir().")
   }
   file <- file.path(path, basename(file))
   reclass <- class(x)
   x <- as.list(x)
   x$ds <- .global$nullptr
   x$files <- basename(x$files)
-  x <- structure(list(x), class = "mrgsimsds_save_ds", reclass = reclass)
+  x <- structure(x, class = "mrgsimsds_save_ds", reclass = reclass)
   saveRDS(object = x, file = file)
   invisible(file)
 }
@@ -135,7 +137,7 @@ read_ds <- function(file) {
     abort("[read_ds] unrecognized object in rds file.")
   }
   reclass <- attr(x, "reclass")
-  x <- list2env(x[[1]])
+  x <- list2env(x)
   class(x) <- reclass
   if(!all(file.exists(x$files))) {
     abort("[read_ds] one or more files could not be located.")
@@ -188,7 +190,7 @@ read_ds <- function(file) {
 #' 
 #' out <- reduce_ds(out)
 #' 
-#' out <- rename(out, "new-name")
+#' out <- rename_ds(out, "new-name")
 #' 
 #' out$files
 #' 
@@ -197,7 +199,7 @@ read_ds <- function(file) {
 #' out$files
 #' 
 #' @export
-move_ds <- function(x, path) {
+move_ds <- function(x, path, quietly = FALSE) {
   require_ds(x)
   if(!check_ownership(x)) {
     abort("cannot move files you don't own.")  
@@ -211,6 +213,12 @@ move_ds <- function(x, path) {
   x <- refresh_ds(x)
   set_gc_auto(x)
   take_ownership(x)
+  if(isFALSE(quietly)) {
+    gcstatus <- ifelse(isTRUE(x$gc), "on", "off")
+    msg <- glue("files are now located in {path}; gc is {gcstatus}.")
+    names(msg) <- "i"
+    inform(msg)  
+  }
   invisible(x)
 }
 

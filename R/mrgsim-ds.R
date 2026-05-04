@@ -152,7 +152,7 @@ mrgsim_ds <- function(x,  ..., tags = list(), verbose = FALSE,
 #' @param ... arguments to be passed to or from other methods.
 #' 
 #' @details
-#' `head()` and `tail()` only look at the first and last `file` in the data 
+#' `head()`  and `tail()` only look at the first and last `file` in the data 
 #' set, respectively, when simulations are stored across multiple files. It is 
 #' possible this won't correspond to the first and last chunks rows of data
 #' you will see when collecting the data via [dplyr::collect()].
@@ -192,7 +192,12 @@ dim.mrgsimsds <- function(x) {
 head.mrgsimsds <-  function(x, n = 6L, ...) {
   check_files_fatal(x)
   x <- safe_ds(x)
-  as_tibble(get_nrow_from_ds(x, n = n))
+  if(length(x$files) > 1) {
+    ds <- open_dataset(x$files[1])
+    collect(head(x$ds, n = n))
+  } else {
+    collect(head(x$ds, n = n))  
+  }
 }
 
 #' @name mrgsimsds-methods
