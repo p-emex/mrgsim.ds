@@ -12,6 +12,8 @@
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/as_mrgsim_ds.html</loc></url>
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/as_tibble.mrgsimsds.html</loc></url>
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/copy_ds.html</loc></url>
+<url><loc>https://kylebaron.github.io/mrgsim.ds/reference/current_location.html</loc></url>
+<url><loc>https://kylebaron.github.io/mrgsim.ds/reference/files_ds.html</loc></url>
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/gc_ds.html</loc></url>
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/index.html</loc></url>
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/is_mrgsimsds.html</loc></url>
@@ -27,6 +29,7 @@
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/prune_ds.html</loc></url>
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/reduce_ds.html</loc></url>
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/refresh_ds.html</loc></url>
+<url><loc>https://kylebaron.github.io/mrgsim.ds/reference/save_ds.html</loc></url>
 <url><loc>https://kylebaron.github.io/mrgsim.ds/reference/save_process_info.html</loc></url>
 </urlset>
 

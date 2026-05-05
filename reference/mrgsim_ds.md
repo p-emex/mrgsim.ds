@@ -9,7 +9,7 @@ and writes simulation output to a parquet file in
 garbage collection by default. Use
 [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
 or
-[`write_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
+[`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
 to relocate files outside
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html), which automatically
 disables gc, or call
@@ -55,7 +55,7 @@ mrgsim_ds(x, ..., tags = list(), verbose = FALSE, gc = TRUE)
   locked:
   [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
   and
-  [`write_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
+  [`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
   will automatically adjust gc based on whether the files remain under
   [`tempdir()`](https://rdrr.io/r/base/tempfile.html). To lock the gc
   setting and prevent automatic adjustment, call

@@ -2,12 +2,12 @@
 
 Functions for inspecting and cleaning up package-managed parquet files
 in [`tempdir()`](https://rdrr.io/r/base/tempfile.html). `list_temp()`
-shows what is present; `retain_temp()` removes everything except the
-files belonging to specified objects; `purge_temp()` removes all
+shows what is present; `purge_except_temp()` removes everything except
+the files belonging to specified objects; `purge_temp()` removes all
 package-managed files unconditionally.
 
-Note: `purge_temp()` and `retain_temp()` should not be needed in routine
-usage when simulation output objects are subject to the garbage
+Note: `purge_temp()` and `purge_except_temp()` should not be needed in
+routine usage when simulation output objects are subject to the garbage
 collector. Calling them while active objects still point to those files
 will cause errors on next data access.
 
@@ -16,7 +16,7 @@ will cause errors on next data access.
 ``` r
 list_temp(quietly = FALSE)
 
-retain_temp(..., quietly = FALSE)
+purge_except_temp(..., quietly = FALSE)
 
 purge_temp(quietly = FALSE)
 ```
@@ -29,15 +29,16 @@ purge_temp(quietly = FALSE)
 
 - ...:
 
-  mrgsimsds objects whose files will be retained by `retain_temp()`;
-  non-mrgsimsds objects are ignored with a warning.
+  mrgsimsds objects whose files will be retained by
+  `purge_except_temp()`; non-mrgsimsds objects are ignored with a
+  warning.
 
 ## Value
 
 `list_temp()` returns a character vector of file paths invisibly, and
 prints a summary to the console unless `quietly = TRUE`.
 
-`retain_temp()` and `purge_temp()` return `NULL` invisibly.
+`purge_except_temp()` and `purge_temp()` return `NULL` invisibly.
 
 ## Examples
 
@@ -48,32 +49,32 @@ out <- lapply(1:10, \(x) mrgsim_ds(mod))
 
 list_temp()
 #> 15 files [143.7 Kb]
-#> - mrgsims-ds-1aaa10141577.parquet
-#> - mrgsims-ds-1aaa1f8dddd5.parquet
+#> - mrgsims-ds-1ac9259b86e7.parquet
+#> - mrgsims-ds-1ac92e90f105.parquet
 #>    ...
-#> - mrgsims-ds-1aaaa6e6f71.parquet
-#> - mrgsims-ds-1aaab052f62.parquet
+#> - mrgsims-ds-1ac977315fee.parquet
+#> - mrgsims-ds-1ac97fe1a2.parquet
 
 sims <- reduce_ds(out)
 
 list_temp()
 #> 15 files [143.7 Kb]
-#> - mrgsims-ds-1aaa10141577.parquet
-#> - mrgsims-ds-1aaa1f8dddd5.parquet
+#> - mrgsims-ds-1ac9259b86e7.parquet
+#> - mrgsims-ds-1ac92e90f105.parquet
 #>    ...
-#> - mrgsims-ds-1aaaa6e6f71.parquet
-#> - mrgsims-ds-1aaab052f62.parquet
+#> - mrgsims-ds-1ac977315fee.parquet
+#> - mrgsims-ds-1ac97fe1a2.parquet
 
-retain_temp(sims)
+purge_except_temp(sims)
 #> Discarding 5 files.
 
 list_temp()
 #> 10 files [51.3 Kb]
-#> - mrgsims-ds-1aaa10141577.parquet
-#> - mrgsims-ds-1aaa2705545e.parquet
+#> - mrgsims-ds-1ac9259b86e7.parquet
+#> - mrgsims-ds-1ac92e90f105.parquet
 #>    ...
-#> - mrgsims-ds-1aaa78c565a6.parquet
-#> - mrgsims-ds-1aaaa6e6f71.parquet
+#> - mrgsims-ds-1ac977315fee.parquet
+#> - mrgsims-ds-1ac97fe1a2.parquet
 
 purge_temp()
 #> Discarding 10 files.

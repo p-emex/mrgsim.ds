@@ -40,7 +40,7 @@ relocate(.data, ..., .before = NULL, .after = NULL)
 count(x, ..., wt = NULL, sort = FALSE, name = NULL)
 
 # S3 method for class 'mrgsimsds'
-pull(.data, var = -1, name = NULL, ...)
+pull(.data, var = -1, name = NULL, as_vector = TRUE, ...)
 ```
 
 ## Arguments
@@ -94,6 +94,11 @@ pull(.data, var = -1, name = NULL, ...)
   [`dplyr::pull()`](https://dplyr.tidyverse.org/reference/pull.html).
 
 - var:
+
+  passed to
+  [`dplyr::pull()`](https://dplyr.tidyverse.org/reference/pull.html).
+
+- as_vector:
 
   passed to
   [`dplyr::pull()`](https://dplyr.tidyverse.org/reference/pull.html).

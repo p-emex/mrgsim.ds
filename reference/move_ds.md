@@ -1,26 +1,18 @@
-# Move, rename, or write out data set files
+# Move, rename, combine files in mrgsimsds objects
 
-Use `move_ds()` to change the enclosing directory. `write_ds()` can also
-move the files, but it always condenses the simulation output into a
-single parquet file if multiple files are backing the mrgsimsds object.
-All operations are made on the object in place.
-
-There is an important distinction between `write_ds()` and `move_ds()`
-or `rename_ds()` for multi-file objects. The backing files can be moved
-or renamed with little computational effort. For multi-file simulation
-outputs, `write_ds()` will need to read each file and write the data out
-to a single file. Apache Arrow can do this very efficiently, but there
-will still be an additional, potentially noticeable computational
-effort.
+Use `move_ds()` to change the enclosing directory. `rename_ds()` keeps
+the files in place, but changes the file names. `combine_ds()` brings
+simulated data from multiple backing file into a single file.
 
 ### Automatic gc adjustment
 
-Both `move_ds()` and `write_ds()` automatically update the gc flag based
-on where the files end up: files that remain under
+Only `move_ds()` automatically updates the gc flag based on where the
+files end up: files that remain under
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html) keep `gc = TRUE`;
 files moved outside [`tempdir()`](https://rdrr.io/r/base/tempfile.html)
-get `gc = FALSE`, protecting them from automatic deletion. `rename_ds()`
-never changes the gc flag because it does not change the file location.
+get `gc = FALSE`, protecting them from automatic deletion. Neither
+`rename_ds()` nor `combine_ds()` changes the gc flag because neither
+changes the file location.
 
 This automatic adjustment is skipped if the gc setting has been locked
 by a prior call to
@@ -29,7 +21,7 @@ warning is issued if gc is locked to `TRUE` but files land outside
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html).
 
 The object (`x`) is required to own the underlying files in order to
-move or rename them; ownership is not required for `write_ds()`.
+move, rename, or combine them.
 
 All three functions modify `x` in place and file ownership stays with
 `x`.
@@ -37,11 +29,11 @@ All three functions modify `x` in place and file ownership stays with
 ## Usage
 
 ``` r
-move_ds(x, path)
+move_ds(x, path, quietly = FALSE)
 
 rename_ds(x, id)
 
-write_ds(x, sink, ...)
+combine_ds(x)
 ```
 
 ## Arguments
@@ -54,21 +46,14 @@ write_ds(x, sink, ...)
 
   the new directory location for backing files.
 
+- quietly:
+
+  if `FALSE`, a message is printed about the potentially new location of
+  the backing files on move.
+
 - id:
 
   a short name used to create data set files for the simulated output.
-
-- sink:
-
-  the complete path (including file name) for a single parquet file
-  containing all simulated data; passed to
-  [`arrow::write_parquet()`](https://arrow.apache.org/docs/r/reference/write_parquet.html).
-
-- ...:
-
-  passed to
-  [`arrow::write_parquet()`](https://arrow.apache.org/docs/r/reference/write_parquet.html);
-  files are always written in parquet format.
 
 ## Value
 
@@ -78,25 +63,22 @@ accessible via `x$files`.
 ## Examples
 
 ``` r
+
 mod <- house_ds()
 
 out <- lapply(1:3, \(x) { mrgsim_ds(mod, events = ev(amt = 100)) })
 
 out <- reduce_ds(out)
 
-rename_ds(out, id = "example-sims")
+out <- rename_ds(out, "new-name")
 
-basename(out$files)
-#> [1] "mrgsims-ds-example-sims-0001.parquet"
-#> [2] "mrgsims-ds-example-sims-0002.parquet"
-#> [3] "mrgsims-ds-example-sims-0003.parquet"
+out$files
+#> [1] "/tmp/RtmpB16Mk1/mrgsims-ds-new-name-1.parquet"
+#> [2] "/tmp/RtmpB16Mk1/mrgsims-ds-new-name-2.parquet"
+#> [3] "/tmp/RtmpB16Mk1/mrgsims-ds-new-name-3.parquet"
 
-write_ds(out, sink = file.path(tempdir(), "example.parquet"))
+out <- combine_ds(out)
 
-basename(out$files)
-#> [1] "example.parquet"
-
-if (FALSE) { # \dontrun{
-  move_ds(out, path = "data/simulated") 
-} # }
+out$files
+#> [1] "/tmp/RtmpB16Mk1/mrgsims-ds-1ac98b08768.parquet"
 ```

@@ -1,6 +1,7 @@
 # Get Started
 
 ``` r
+
 library(mrgsim.ds)
 library(dplyr)
 ```
@@ -12,6 +13,7 @@ Load a model using
 or other friends.
 
 ``` r
+
 mod <- mread_ds("popex-2.mod", outvars = "IPRED, DV, ECL")
 ```
 
@@ -26,6 +28,7 @@ To simulate, call
 [`mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mrgsim_ds.md)
 
 ``` r
+
 data <- evd_expand(amt = c(100, 300, 700), ii = 24, addl = 4, ID = 1:10)
 
 set.seed(98)
@@ -36,6 +39,7 @@ The output handles very similar to regular
 [`mrgsim()`](https://mrgsolve.org/docs/reference/mrgsim.html) output
 
 ``` r
+
 out
 ```
 
@@ -54,6 +58,7 @@ out
     ## 8:   1  3.0 -0.1397334 2.1179631 2.1179631
 
 ``` r
+
 head(out)
 ```
 
@@ -68,12 +73,14 @@ head(out)
     ## 6     1   2   -0.140 1.86  1.86
 
 ``` r
+
 dim(out)
 ```
 
     ## [1] 14460     5
 
 ``` r
+
 plot(out, nid = 10)
 ```
 
@@ -85,31 +92,58 @@ Simulation files are always initially stored in
 [`tempdir()`](https://rdrr.io/r/base/tempfile.html)
 
 ``` r
+
 out <- lapply(1:10, \(x) mrgsim_ds(mod, data)) %>% reduce_ds()
 
 list_temp()
 ```
 
     ## 10 files [2.9 Mb]
-    ## - mrgsims-ds-1d1a10347727.parquet
-    ## - mrgsims-ds-1d1a29ec75e2.parquet
+    ## - mrgsims-ds-1d6112910515.parquet
+    ## - mrgsims-ds-1d6120a13317.parquet
     ##    ...
-    ## - mrgsims-ds-1d1a55bd9194.parquet
-    ## - mrgsims-ds-1d1a5db0c235.parquet
+    ## - mrgsims-ds-1d6175b288c9.parquet
+    ## - mrgsims-ds-1d618a93e07.parquet
 
-To save outputs to a persistent location, use
-[`write_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md).
+To save outputs to a persistent location, use `write_ds()`.
 
 ``` r
-write_ds(out, sink = file.path(save_dir, "regimen1"))
+
+save_ds(out, file = file.path(save_dir, "sims.rds"))
 ```
 
-This re-writes all the data into a single parquet file. This can take
-some time for very large outputs across multiple files.
+This creates an `.rds` file holding the (very lightweight) simulation
+output object *and* it relocates all the backing files to `save_dir`.
+
+To read the simulations back into R
+
+``` r
+
+bah <- read_ds(file.path(save_dir, "sims.rds"))
+
+bah
+```
+
+    ## Model: popex-2_mod
+    ## Dim  : 144.6K x 5
+    ## Files: 10 [2.9 Mb]
+    ## Owner: yes (no gc)
+    ##     ID TIME       ECL    IPRED       DV
+    ## 1:   1  0.0 0.3317106 0.000000 0.000000
+    ## 2:   1  0.0 0.3317106 0.000000 0.000000
+    ## 3:   1  0.5 0.3317106 1.323846 1.323846
+    ## 4:   1  1.0 0.3317106 2.324135 2.324135
+    ## 5:   1  1.5 0.3317106 3.067727 3.067727
+    ## 6:   1  2.0 0.3317106 3.608127 3.608127
+    ## 7:   1  2.5 0.3317106 3.988131 3.988131
+    ## 8:   1  3.0 0.3317106 4.241954 4.241954
 
 An alternative is to rename and move.
 
 ``` r
-rename_ds(out, "regimen-1")
-move_ds(out, save_dir)
+
+rename_ds(bah, "regimen-1")
+move_ds(bah, save_dir)
 ```
+
+    ## ℹ files are now located in /tmp/Rtmpm4yYKq; gc is off.

@@ -28,6 +28,7 @@ make readme     # Render README.Rmd → README.md
 Run a single test file from R:
 
 ``` r
+
 testthat::test_file("tests/testthat/test-own.R")
 ```
 
@@ -64,20 +65,20 @@ simulations.
 
 ### Key Source Files
 
-| File            | Responsibility                                                                                                                                                                                                                                 |
-|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `R/mrgsim-ds.R` | [`mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mrgsim_ds.md), [`as_mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/as_mrgsim_ds.md), core S3 methods                                                            |
-| `R/own.R`       | Ownership system: claim, transfer, disown                                                                                                                                                                                                      |
-| `R/files.R`     | [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), [`rename_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), [`write_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)             |
-| `R/wrapper.R`   | [`mread_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mread_ds.md) and friends — mrgsolve model loading                                                                                                                               |
-| `R/collect.R`   | Coercion to tibble, Arrow table, DuckDB                                                                                                                                                                                                        |
-| `R/verbs.R`     | dplyr S3 methods (filter, mutate, summarise, etc.)                                                                                                                                                                                             |
-| `R/reduce.R`    | [`reduce_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/reduce_ds.md) — combines a list of outputs                                                                                                                                     |
-| `R/refresh.R`   | [`refresh_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/refresh_ds.md) — rebuild Arrow pointer post-fork                                                                                                                              |
-| `R/temp.R`      | [`list_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md), [`retain_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md), [`purge_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md) |
-| `R/gc.R`        | [`gc_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/gc_ds.md) — toggle GC/auto-delete and notify flags                                                                                                                                 |
-| `R/prune.R`     | [`prune_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/prune_ds.md) — filter a list to only mrgsimsds objects                                                                                                                          |
-| `R/simlist.R`   | Internal helpers for working with lists of mrgsimsds objects                                                                                                                                                                                   |
+| File | Responsibility |
+|----|----|
+| `R/mrgsim-ds.R` | [`mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mrgsim_ds.md), [`as_mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/as_mrgsim_ds.md), core S3 methods |
+| `R/own.R` | Ownership system: claim, transfer, disown |
+| `R/files.R` | [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), [`rename_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), `write_ds()` |
+| `R/wrapper.R` | [`mread_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mread_ds.md) and friends — mrgsolve model loading |
+| `R/collect.R` | Coercion to tibble, Arrow table, DuckDB |
+| `R/verbs.R` | dplyr S3 methods (filter, mutate, summarise, etc.) |
+| `R/reduce.R` | [`reduce_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/reduce_ds.md) — combines a list of outputs |
+| `R/refresh.R` | [`refresh_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/refresh_ds.md) — rebuild Arrow pointer post-fork |
+| `R/temp.R` | [`list_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md), [`purge_except_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md), [`purge_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md) |
+| `R/gc.R` | [`gc_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/gc_ds.md) — toggle GC/auto-delete and notify flags |
+| `R/prune.R` | [`prune_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/prune_ds.md) — filter a list to only mrgsimsds objects |
+| `R/simlist.R` | Internal helpers for working with lists of mrgsimsds objects |
 
 ### Package-level State (`R/AAA.R`)
 

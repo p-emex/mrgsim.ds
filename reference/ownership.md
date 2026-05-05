@@ -70,31 +70,19 @@ check_ownership(out)
 #> [1] TRUE
 
 ownership()
-#> > Objects: 12 | Files: 21 | Size: 418.7 Kb
+#> > Objects: 9 | Files: 9 | Size: 330 Kb
 
 list_ownership()
-#>                               file        address
-#> 1  mrgsims-ds-1aaa78c565a6.parquet 0x5644e762c520
-#> 2  mrgsims-ds-1aaa6c1cb585.parquet 0x5644e762c520
-#> 3  mrgsims-ds-1aaa1f8dddd5.parquet 0x5644eeea5360
-#> 4  mrgsims-ds-1aaa6e73999a.parquet 0x5644ee657b60
-#> 5  mrgsims-ds-1aaa10141577.parquet 0x5644e762c520
-#> 6                  example.parquet 0x5644ec0a7f38
-#> 7  mrgsims-ds-1aaa4dfe41dd.parquet 0x5644ec9912a0
-#> 8  mrgsims-ds-1aaa2705545e.parquet 0x5644e762c520
-#> 9  mrgsims-ds-1aaa4a56b164.parquet 0x5644eb9f57c8
-#> 10 mrgsims-ds-1aaa7e99c604.parquet 0x5644e303c470
-#> 11 mrgsims-ds-1aaa35c53035.parquet 0x5644e762c520
-#> 12 mrgsims-ds-1aaa564f9876.parquet 0x5644e762c520
-#> 13 mrgsims-ds-1aaa2ae134f7.parquet 0x5644e762c520
-#> 14 mrgsims-ds-1aaa38eec8f4.parquet 0x5644f1855128
-#> 15  mrgsims-ds-1aaab052f62.parquet 0x5644ef1e6b08
-#> 16  mrgsims-ds-1aaa1dc49a2.parquet 0x5644f07b4d90
-#> 17  mrgsims-ds-1aaaa6e6f71.parquet 0x5644e762c520
-#> 18 mrgsims-ds-1aaa2a46e766.parquet 0x5644f02c5100
-#> 19 mrgsims-ds-1aaa6ce10b0c.parquet 0x5644e762c520
-#> 20 mrgsims-ds-1aaa1eed8777.parquet 0x5644eee4e550
-#> 21 mrgsims-ds-1aaa47011c44.parquet 0x5644e762c520
+#>                              file        address
+#> 1  mrgsims-ds-1ac97813e59.parquet 0x55c3c398e708
+#> 2 mrgsims-ds-1ac92e94d5b4.parquet 0x55c3b7c584f0
+#> 3 mrgsims-ds-1ac96a331d19.parquet 0x55c3c22cf9a8
+#> 4 mrgsims-ds-1ac945dd3916.parquet 0x55c3c30a8a18
+#> 5 mrgsims-ds-1ac956447968.parquet 0x55c3c4ea2618
+#> 6 mrgsims-ds-1ac96a185f8b.parquet 0x55c3bedcdd18
+#> 7 mrgsims-ds-1ac9657ac79c.parquet 0x55c3c5052c38
+#> 8 mrgsims-ds-1ac972d82e78.parquet 0x55c3c3b4b6e8
+#> 9 mrgsims-ds-1ac9354b3d74.parquet 0x55c3bd416408
 
 e1 <- ev(amt = 100)
 e2 <- ev(amt = 200)
@@ -104,7 +92,7 @@ out <- list(mrgsim_ds(mod, e1), mrgsim_ds(mod, e2))
 sims <- reduce_ds(out)
 
 ownership()
-#> > Objects: 13 | Files: 23 | Size: 472 Kb
+#> > Objects: 10 | Files: 11 | Size: 383.3 Kb
 
 check_ownership(sims)
 #> [1] TRUE

@@ -48,13 +48,19 @@ locations for later use.
 
   - [`names.mrgsimsds()`](https://kylebaron.github.io/mrgsim.ds/reference/mrgsimsds-methods.md)
 
-- Move or rename files
-
-  - [`rename_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
+- Move, rename, or combine files
 
   - [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
 
-  - [`write_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
+  - [`rename_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
+
+  - [`combine_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
+
+- Save and restore
+
+  - [`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
+
+  - [`read_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
 
 - Ownership
 
@@ -82,7 +88,7 @@ locations for later use.
 
   - [`list_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
 
-  - [`retain_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
+  - [`purge_except_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
 
   - [`purge_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
 
@@ -146,6 +152,7 @@ Useful links:
 ## Examples
 
 ``` r
+
 mod <- house_ds(end = 32)
 
 data <- evd_expand(amt = seq(100, 300, 10))
@@ -194,10 +201,10 @@ plot(out, nid = 10)
 
 list_temp()
 #> 1 files [129 Kb]
-#> - mrgsims-ds-1aaa1eed8777.parquet
+#> - mrgsims-ds-1ac945dd3916.parquet
 
 ownership()
-#> > Objects: 8 | Files: 17 | Size: 162 Kb
+#> > Objects: 6 | Files: 6 | Size: 129 Kb
 
 if (FALSE) { # \dontrun{
 

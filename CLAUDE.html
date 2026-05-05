@@ -72,41 +72,41 @@
 </div>
 <div class="section level3">
 <h3 id="key-source-files">Key Source Files<a class="anchor" aria-label="anchor" href="#key-source-files"></a></h3>
-<table class="table"><colgroup><col width="28%"><col width="71%"></colgroup><thead><tr class="header"><th>File</th>
+<table class="table"><colgroup><col width="28%"><col width="71%"></colgroup><thead><tr><th>File</th>
 <th>Responsibility</th>
-</tr></thead><tbody><tr class="odd"><td><code>R/mrgsim-ds.R</code></td>
+</tr></thead><tbody><tr><td><code>R/mrgsim-ds.R</code></td>
 <td>
 <code><a href="reference/mrgsim_ds.html">mrgsim_ds()</a></code>, <code><a href="reference/as_mrgsim_ds.html">as_mrgsim_ds()</a></code>, core S3 methods</td>
-</tr><tr class="even"><td><code>R/own.R</code></td>
+</tr><tr><td><code>R/own.R</code></td>
 <td>Ownership system: claim, transfer, disown</td>
-</tr><tr class="odd"><td><code>R/files.R</code></td>
+</tr><tr><td><code>R/files.R</code></td>
 <td>
-<code><a href="reference/move_ds.html">move_ds()</a></code>, <code><a href="reference/move_ds.html">rename_ds()</a></code>, <code><a href="reference/move_ds.html">write_ds()</a></code>
+<code><a href="reference/move_ds.html">move_ds()</a></code>, <code><a href="reference/move_ds.html">rename_ds()</a></code>, <code>write_ds()</code>
 </td>
-</tr><tr class="even"><td><code>R/wrapper.R</code></td>
+</tr><tr><td><code>R/wrapper.R</code></td>
 <td>
 <code><a href="reference/mread_ds.html">mread_ds()</a></code> and friends — mrgsolve model loading</td>
-</tr><tr class="odd"><td><code>R/collect.R</code></td>
+</tr><tr><td><code>R/collect.R</code></td>
 <td>Coercion to tibble, Arrow table, DuckDB</td>
-</tr><tr class="even"><td><code>R/verbs.R</code></td>
+</tr><tr><td><code>R/verbs.R</code></td>
 <td>dplyr S3 methods (filter, mutate, summarise, etc.)</td>
-</tr><tr class="odd"><td><code>R/reduce.R</code></td>
+</tr><tr><td><code>R/reduce.R</code></td>
 <td>
 <code><a href="reference/reduce_ds.html">reduce_ds()</a></code> — combines a list of outputs</td>
-</tr><tr class="even"><td><code>R/refresh.R</code></td>
+</tr><tr><td><code>R/refresh.R</code></td>
 <td>
 <code><a href="reference/refresh_ds.html">refresh_ds()</a></code> — rebuild Arrow pointer post-fork</td>
-</tr><tr class="odd"><td><code>R/temp.R</code></td>
+</tr><tr><td><code>R/temp.R</code></td>
 <td>
-<code><a href="reference/list_temp.html">list_temp()</a></code>, <code><a href="reference/list_temp.html">retain_temp()</a></code>, <code><a href="reference/list_temp.html">purge_temp()</a></code>
+<code><a href="reference/list_temp.html">list_temp()</a></code>, <code><a href="reference/list_temp.html">purge_except_temp()</a></code>, <code><a href="reference/list_temp.html">purge_temp()</a></code>
 </td>
-</tr><tr class="even"><td><code>R/gc.R</code></td>
+</tr><tr><td><code>R/gc.R</code></td>
 <td>
 <code><a href="reference/gc_ds.html">gc_ds()</a></code> — toggle GC/auto-delete and notify flags</td>
-</tr><tr class="odd"><td><code>R/prune.R</code></td>
+</tr><tr><td><code>R/prune.R</code></td>
 <td>
 <code><a href="reference/prune_ds.html">prune_ds()</a></code> — filter a list to only mrgsimsds objects</td>
-</tr><tr class="even"><td><code>R/simlist.R</code></td>
+</tr><tr><td><code>R/simlist.R</code></td>
 <td>Internal helpers for working with lists of mrgsimsds objects</td>
 </tr></tbody></table></div>
 <div class="section level3">

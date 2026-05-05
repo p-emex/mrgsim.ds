@@ -60,8 +60,15 @@ output.
 
 - [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
   [`rename_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
-  [`write_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
-  : Move, rename, or write out data set files
+  [`combine_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
+  : Move, rename, combine files in mrgsimsds objects
+- [`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
+  [`read_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
+  : Save and restore an mrgsimsds object
+- [`files_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/files_ds.md)
+  : Get names of backing files
+- [`current_location()`](https://kylebaron.github.io/mrgsim.ds/reference/current_location.md)
+  : Get the current location of mrgsimsds object files
 
 ## Manage or query ownership
 
@@ -93,7 +100,7 @@ Commonly needed after batch simulation in parallel
 ## Manage simulation outputs in `tempdir()`
 
 - [`list_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
-  [`retain_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
+  [`purge_except_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
   [`purge_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
   : Manage simulated outputs in the per-session temporary directory
 

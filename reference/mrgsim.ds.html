@@ -94,9 +94,12 @@ removed prior to object cleanup.</p></li>
 <li><p><code><a href="mrgsimsds-methods.html">dim.mrgsimsds()</a></code></p></li>
 <li><p><code><a href="mrgsimsds-methods.html">names.mrgsimsds()</a></code></p></li>
 </ul></li>
-<li><p>Move or rename files</p><ul><li><p><code><a href="move_ds.html">rename_ds()</a></code></p></li>
-<li><p><code><a href="move_ds.html">move_ds()</a></code></p></li>
-<li><p><code><a href="move_ds.html">write_ds()</a></code></p></li>
+<li><p>Move, rename, or combine files</p><ul><li><p><code><a href="move_ds.html">move_ds()</a></code></p></li>
+<li><p><code><a href="move_ds.html">rename_ds()</a></code></p></li>
+<li><p><code><a href="move_ds.html">combine_ds()</a></code></p></li>
+</ul></li>
+<li><p>Save and restore</p><ul><li><p><code><a href="save_ds.html">save_ds()</a></code></p></li>
+<li><p><code><a href="save_ds.html">read_ds()</a></code></p></li>
 </ul></li>
 <li><p>Ownership</p><ul><li><p><code><a href="ownership.html">ownership()</a></code></p></li>
 <li><p><code><a href="ownership.html">check_ownership()</a></code></p></li>
@@ -110,7 +113,7 @@ removed prior to object cleanup.</p></li>
 <li><p><code><a href="prune_ds.html">prune_ds()</a></code></p></li>
 </ul></li>
 <li><p>Manage tempdir</p><ul><li><p><code><a href="list_temp.html">list_temp()</a></code></p></li>
-<li><p><code><a href="list_temp.html">retain_temp()</a></code></p></li>
+<li><p><code><a href="list_temp.html">purge_except_temp()</a></code></p></li>
 <li><p><code><a href="list_temp.html">purge_temp()</a></code></p></li>
 </ul></li>
 <li><p>Enter dplyr / arrow pipelines with</p><ul><li><p><code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">dplyr::mutate()</a></code></p></li>
@@ -198,10 +201,10 @@ removed prior to object cleanup.</p></li>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="list_temp.html">list_temp</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 files [129 Kb]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> - mrgsims-ds-1aaa1eed8777.parquet</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> - mrgsims-ds-1ac945dd3916.parquet</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="ownership.html">ownership</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; Objects: 8 | Files: 17 | Size: 162 Kb</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &gt; Objects: 6 | Files: 6 | Size: 129 Kb</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span></span></span>
