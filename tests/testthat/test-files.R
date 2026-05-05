@@ -109,5 +109,15 @@ test_that("temp file helpers", {
   expect_silent(purge_except_temp(out2, quietly = TRUE))
 })
 
+test_that("write_parquet_ds writes a readable parquet file", {
+  out <- mrgsim_ds(mod, gc = FALSE)
+  dest <- tempfile(fileext = ".parquet")
+  on.exit(unlink(dest))
+  write_parquet_ds(out, dest)
+  expect_true(file.exists(dest))
+  result <- dplyr::collect(arrow::open_dataset(dest))
+  expect_equal(result, dplyr::collect(out))
+})
+
 rm(mod)
 mrgsim.ds:::teardown_ds()

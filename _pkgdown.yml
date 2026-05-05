@@ -34,11 +34,12 @@ reference:
   - relocate.mrgsimsds
   - count.mrgsimsds
   - pull.mrgsimsds
-- title: Move or rename outputs
+- title: Move, rename, or save outputs
   contents:
   - move_ds
-  - read_ds
   - save_ds
+  - read_ds
+  - write_parquet_ds
   - rename_ds
   - files_ds
   - current_location
