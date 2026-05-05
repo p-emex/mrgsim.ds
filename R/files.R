@@ -57,9 +57,11 @@ current_location <- function(x) {
 }
 
 #' Get names of backing files
-#' 
+#'
 #' @param x an mrgsimsds object.
-#' 
+#'
+#' @return A character vector of absolute paths to the parquet files backing `x`.
+#'
 #' @export
 files_ds <- function(x) {
   require_ds(x)

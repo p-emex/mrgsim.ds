@@ -34,6 +34,7 @@ The central object is not a data frame — it's a lightweight environment with f
 - `$hash` — xxh3_64 hashes of those files (used by the ownership system)
 - `$pid` — process ID where the object was created
 - `$gc` — whether files are auto-deleted on GC finalization
+- `$mod` — the mrgsolve model object that produced the simulation
 
 ### Ownership System (`R/own.R`)
 
@@ -49,8 +50,8 @@ Objects track `$pid` (creation process). Arrow Dataset pointers become invalid a
 |------|---------------|
 | `R/mrgsim-ds.R` | `mrgsim_ds()`, `as_mrgsim_ds()`, core S3 methods |
 | `R/own.R` | Ownership system: claim, transfer, disown |
-| `R/files.R` | `move_ds()`, `rename_ds()`, `write_ds()` |
-| `R/wrapper.R` | `mread_ds()` and friends — mrgsolve model loading |
+| `R/files.R` | `move_ds()`, `rename_ds()`, `combine_ds()`, `save_ds()`, `read_ds()`, `write_parquet_ds()`, `write_dataset_ds()` |
+| `R/wrapper.R` | `mread_ds()` and friends — mrgsolve model loading (stamps model with `save_process_info()`, required before `mrgsim_ds()`) |
 | `R/collect.R` | Coercion to tibble, Arrow table, DuckDB |
 | `R/verbs.R` | dplyr S3 methods (filter, mutate, summarise, etc.) |
 | `R/reduce.R` | `reduce_ds()` — combines a list of outputs |
