@@ -657,7 +657,7 @@ output.
   [`pull(`*`<mrgsimsds>`*`)`](https://kylebaron.github.io/mrgsim.ds/reference/mrgsimsds-verbs.md)
   : dplyr verbs for mrgsimsds objects
 
-## Move or rename outputs
+## Move, rename, or save outputs
 
 - [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
   [`rename_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md)
@@ -666,6 +666,9 @@ output.
 - [`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
   [`read_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
   : Save and restore an mrgsimsds object
+- [`write_parquet_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/write_parquet_ds.md)
+  [`write_dataset_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/write_parquet_ds.md)
+  : Write simulations to a parquet file or partitioned dataset
 - [`files_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/files_ds.md)
   : Get names of backing files
 - [`current_location()`](https://kylebaron.github.io/mrgsim.ds/reference/current_location.md)

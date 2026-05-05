@@ -62,6 +62,10 @@ locations for later use.
 
   - [`read_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
 
+  - [`write_parquet_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/write_parquet_ds.md)
+
+  - [`write_dataset_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/write_parquet_ds.md)
+
 - Ownership
 
   - [`ownership()`](https://kylebaron.github.io/mrgsim.ds/reference/ownership.md)
@@ -201,7 +205,7 @@ plot(out, nid = 10)
 
 list_temp()
 #> 1 files [129 Kb]
-#> - mrgsims-ds-1ac945dd3916.parquet
+#> - mrgsims-ds-1a9f5c3c6c77.parquet
 
 ownership()
 #> > Objects: 6 | Files: 6 | Size: 129 Kb

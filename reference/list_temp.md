@@ -49,32 +49,32 @@ out <- lapply(1:10, \(x) mrgsim_ds(mod))
 
 list_temp()
 #> 15 files [143.7 Kb]
-#> - mrgsims-ds-1ac9259b86e7.parquet
-#> - mrgsims-ds-1ac92e90f105.parquet
+#> - mrgsims-ds-1a9f145cb782.parquet
+#> - mrgsims-ds-1a9f1a638271.parquet
 #>    ...
-#> - mrgsims-ds-1ac977315fee.parquet
-#> - mrgsims-ds-1ac97fe1a2.parquet
+#> - mrgsims-ds-1a9fc34aa15.parquet
+#> - mrgsims-ds-1a9ff7cbf16.parquet
 
 sims <- reduce_ds(out)
 
 list_temp()
 #> 15 files [143.7 Kb]
-#> - mrgsims-ds-1ac9259b86e7.parquet
-#> - mrgsims-ds-1ac92e90f105.parquet
+#> - mrgsims-ds-1a9f145cb782.parquet
+#> - mrgsims-ds-1a9f1a638271.parquet
 #>    ...
-#> - mrgsims-ds-1ac977315fee.parquet
-#> - mrgsims-ds-1ac97fe1a2.parquet
+#> - mrgsims-ds-1a9fc34aa15.parquet
+#> - mrgsims-ds-1a9ff7cbf16.parquet
 
 purge_except_temp(sims)
 #> Discarding 5 files.
 
 list_temp()
 #> 10 files [51.3 Kb]
-#> - mrgsims-ds-1ac9259b86e7.parquet
-#> - mrgsims-ds-1ac92e90f105.parquet
+#> - mrgsims-ds-1a9f145cb782.parquet
+#> - mrgsims-ds-1a9f2051f20.parquet
 #>    ...
-#> - mrgsims-ds-1ac977315fee.parquet
-#> - mrgsims-ds-1ac97fe1a2.parquet
+#> - mrgsims-ds-1a9fc34aa15.parquet
+#> - mrgsims-ds-1a9ff7cbf16.parquet
 
 purge_temp()
 #> Discarding 10 files.
