@@ -60,6 +60,12 @@ combine_ds(x)
 All three functions return `x` invisibly. The updated file list is
 accessible via `x$files`.
 
+## See also
+
+[`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md),
+[`files_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/files_ds.md),
+[`gc_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/gc_ds.md)
+
 ## Examples
 
 ``` r
@@ -73,12 +79,12 @@ out <- reduce_ds(out)
 out <- rename_ds(out, "new-name")
 
 out$files
-#> [1] "/tmp/RtmpEC5VHm/mrgsims-ds-new-name-1.parquet"
-#> [2] "/tmp/RtmpEC5VHm/mrgsims-ds-new-name-2.parquet"
-#> [3] "/tmp/RtmpEC5VHm/mrgsims-ds-new-name-3.parquet"
+#> [1] "/tmp/RtmpMJD5kA/mrgsims-ds-new-name-1.parquet"
+#> [2] "/tmp/RtmpMJD5kA/mrgsims-ds-new-name-2.parquet"
+#> [3] "/tmp/RtmpMJD5kA/mrgsims-ds-new-name-3.parquet"
 
 out <- combine_ds(out)
 
 out$files
-#> [1] "/tmp/RtmpEC5VHm/mrgsims-ds-19fa9f21cf.parquet"
+#> [1] "/tmp/RtmpMJD5kA/mrgsims-ds-19ae5f6fdf1c.parquet"
 ```

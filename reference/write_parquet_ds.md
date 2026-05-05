@@ -40,3 +40,8 @@ write_dataset_ds(x, path, ...)
 `write_parquet_ds()` returns `x` invisibly.
 
 `write_dataset_ds()` returns `path` invisibly.
+
+## See also
+
+[`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md)
+to persist an object while staying within the `mrgsim.ds` universe.

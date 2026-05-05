@@ -34,6 +34,19 @@ underlying parquet files; the input objects are disowned.
 When `x` is an mrgsimsds object, it is validated, refreshed, and
 returned invisibly with its `pid` updated to the current process.
 
+## Details
+
+### gc behavior
+
+The returned object always gets a fresh, unlocked gc state: `gc_locked`
+is set to `FALSE` and gc is determined by file location via the same
+rule used at creation time — `TRUE` if files are under
+[`tempdir()`](https://rdrr.io/r/base/tempfile.html), `FALSE` otherwise.
+Any gc lock set on the input objects is not carried over. To lock the gc
+setting on the result, call
+[`gc_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/gc_ds.md)
+after reducing.
+
 ## Examples
 
 ``` r

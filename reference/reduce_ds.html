@@ -77,6 +77,21 @@ underlying parquet files; the input objects are disowned.</p>
 <p>When <code>x</code> is an mrgsimsds object, it is validated, refreshed, and returned
 invisibly with its <code>pid</code> updated to the current process.</p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+
+<div class="section">
+<h3 id="gc-behavior">gc behavior<a class="anchor" aria-label="anchor" href="#gc-behavior"></a></h3>
+
+
+<p>The returned object always gets a fresh, unlocked gc state: <code>gc_locked</code> is
+set to <code>FALSE</code> and gc is determined by file location via the same rule used
+at creation time — <code>TRUE</code> if files are under <code><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir()</a></code>, <code>FALSE</code> otherwise.
+Any gc lock set on the input objects is not carried over. To lock the gc
+setting on the result, call <code><a href="gc_ds.html">gc_ds()</a></code> after reducing.</p>
+</div>
+
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
