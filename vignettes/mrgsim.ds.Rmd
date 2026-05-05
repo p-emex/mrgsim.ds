@@ -77,17 +77,24 @@ save_dir <- tempdir()
 ```
 
 
-```{r}
-write_ds(out, sink = file.path(save_dir, "regimen1"))
+```{r, warning = FALSE, message = FALSE}
+save_ds(out, file = file.path(save_dir, "sims.rds"))
 ```
 
-This re-writes all the data into a single parquet file. This can take some time
-for very large outputs across multiple files. 
+This creates an `.rds` file holding the (very lightweight) simulation output object _and_ it 
+relocates all the backing files to `save_dir`. 
+
+To read the simulations back into R
+
+```{r}
+bah <- read_ds(file.path(save_dir, "sims.rds"))
+
+bah
+```
 
 An alternative is to rename and move. 
 
-
 ```{r}
-rename_ds(out, "regimen-1")
-move_ds(out, save_dir)
+rename_ds(bah, "regimen-1")
+move_ds(bah, save_dir)
 ```
