@@ -60,7 +60,7 @@
 <h2 id="architecture">Architecture<a class="anchor" aria-label="anchor" href="#architecture"></a></h2>
 <div class="section level3">
 <h3 id="core-object-mrgsimsds-an-r-environment">Core Object: <code>mrgsimsds</code> (an R environment)<a class="anchor" aria-label="anchor" href="#core-object-mrgsimsds-an-r-environment"></a></h3>
-<p>The central object is not a data frame — it’s a lightweight environment with fields: - <code>$ds</code> — Arrow Dataset (lazy pointer to parquet files on disk) - <code>$files</code> — paths to parquet files - <code>$hash</code> — xxh3_64 hashes of those files (used by the ownership system) - <code>$pid</code> — process ID where the object was created - <code>$gc</code> — whether files are auto-deleted on GC finalization</p>
+<p>The central object is not a data frame — it’s a lightweight environment with fields: - <code>$ds</code> — Arrow Dataset (lazy pointer to parquet files on disk) - <code>$files</code> — paths to parquet files - <code>$hash</code> — xxh3_64 hashes of those files (used by the ownership system) - <code>$pid</code> — process ID where the object was created - <code>$gc</code> — whether files are auto-deleted on GC finalization - <code>$mod</code> — the mrgsolve model object that produced the simulation</p>
 </div>
 <div class="section level3">
 <h3 id="ownership-system-rownr">Ownership System (<code>R/own.R</code>)<a class="anchor" aria-label="anchor" href="#ownership-system-rownr"></a></h3>
@@ -81,11 +81,11 @@
 <td>Ownership system: claim, transfer, disown</td>
 </tr><tr><td><code>R/files.R</code></td>
 <td>
-<code><a href="reference/move_ds.html">move_ds()</a></code>, <code><a href="reference/move_ds.html">rename_ds()</a></code>, <code>write_ds()</code>
+<code><a href="reference/move_ds.html">move_ds()</a></code>, <code><a href="reference/move_ds.html">rename_ds()</a></code>, <code><a href="reference/move_ds.html">combine_ds()</a></code>, <code><a href="reference/save_ds.html">save_ds()</a></code>, <code><a href="reference/save_ds.html">read_ds()</a></code>, <code><a href="reference/write_parquet_ds.html">write_parquet_ds()</a></code>, <code><a href="reference/write_parquet_ds.html">write_dataset_ds()</a></code>
 </td>
 </tr><tr><td><code>R/wrapper.R</code></td>
 <td>
-<code><a href="reference/mread_ds.html">mread_ds()</a></code> and friends — mrgsolve model loading</td>
+<code><a href="reference/mread_ds.html">mread_ds()</a></code> and friends — mrgsolve model loading (stamps model with <code><a href="reference/save_process_info.html">save_process_info()</a></code>, required before <code><a href="reference/mrgsim_ds.html">mrgsim_ds()</a></code>)</td>
 </tr><tr><td><code>R/collect.R</code></td>
 <td>Coercion to tibble, Arrow table, DuckDB</td>
 </tr><tr><td><code>R/verbs.R</code></td>

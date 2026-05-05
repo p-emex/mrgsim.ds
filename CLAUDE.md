@@ -41,7 +41,8 @@ with fields: - `$ds` — Arrow Dataset (lazy pointer to parquet files on
 disk) - `$files` — paths to parquet files - `$hash` — xxh3_64 hashes of
 those files (used by the ownership system) - `$pid` — process ID where
 the object was created - `$gc` — whether files are auto-deleted on GC
-finalization
+finalization - `$mod` — the mrgsolve model object that produced the
+simulation
 
 ### Ownership System (`R/own.R`)
 
@@ -69,8 +70,8 @@ simulations.
 |----|----|
 | `R/mrgsim-ds.R` | [`mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mrgsim_ds.md), [`as_mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/as_mrgsim_ds.md), core S3 methods |
 | `R/own.R` | Ownership system: claim, transfer, disown |
-| `R/files.R` | [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), [`rename_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), `write_ds()` |
-| `R/wrapper.R` | [`mread_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mread_ds.md) and friends — mrgsolve model loading |
+| `R/files.R` | [`move_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), [`rename_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), [`combine_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/move_ds.md), [`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md), [`read_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md), [`write_parquet_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/write_parquet_ds.md), [`write_dataset_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/write_parquet_ds.md) |
+| `R/wrapper.R` | [`mread_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mread_ds.md) and friends — mrgsolve model loading (stamps model with [`save_process_info()`](https://kylebaron.github.io/mrgsim.ds/reference/save_process_info.md), required before [`mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mrgsim_ds.md)) |
 | `R/collect.R` | Coercion to tibble, Arrow table, DuckDB |
 | `R/verbs.R` | dplyr S3 methods (filter, mutate, summarise, etc.) |
 | `R/reduce.R` | [`reduce_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/reduce_ds.md) — combines a list of outputs |
