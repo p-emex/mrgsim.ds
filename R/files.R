@@ -264,19 +264,34 @@ combine_ds <- function(x) {
   invisible(x)
 }
 
-#' Write simulations to a single parquet file
-#' 
-#' Use this function to escape the `mrgsim.ds` universe, writing all simulated
-#' data to a single `.parquet` file of your choosing.
-#' 
-#' 
+#' Write simulations to a parquet file or partitioned dataset
+#'
+#' Use these functions to escape the `mrgsim.ds` universe. `write_parquet_ds()`
+#' writes all simulated data to a single `.parquet` file. `write_dataset_ds()`
+#' writes to a directory, optionally partitioned, via [arrow::write_dataset()];
+#' the caller takes responsibility for the resulting files.
+#'
 #' @param x an mrgsimsds object.
 #' @param sink passed to [arrow::write_parquet()].
-#' @param ... passed to [arrow::write_parquet()].
+#' @param path passed to [arrow::write_dataset()].
+#' @param ... passed to the underlying arrow function.
 #'
-#'@export
+#' @return
+#' `write_parquet_ds()` returns `x` invisibly.
+#'
+#' `write_dataset_ds()` returns `path` invisibly.
+#'
+#' @export
 write_parquet_ds <- function(x, sink, ...) {
   require_ds(x)
   write_parquet(x$ds, sink, ...)
   invisible(x)
+}
+
+#' @rdname write_parquet_ds
+#' @export
+write_dataset_ds <- function(x, path, ...) {
+  require_ds(x)
+  write_dataset(x$ds, path, ...)
+  invisible(path)
 }

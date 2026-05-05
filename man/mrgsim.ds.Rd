@@ -58,6 +58,8 @@ removed prior to object cleanup.
 \itemize{
 \item \code{\link[=save_ds]{save_ds()}}
 \item \code{\link[=read_ds]{read_ds()}}
+\item \code{\link[=write_parquet_ds]{write_parquet_ds()}}
+\item \code{\link[=write_dataset_ds]{write_dataset_ds()}}
 }
 \item Ownership
 \itemize{

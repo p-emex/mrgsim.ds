@@ -1,5 +1,5 @@
 #' @importFrom rlang abort warn inform caller_env is_named is_formula
-#' @importFrom arrow open_dataset  write_parquet Scanner
+#' @importFrom arrow open_dataset write_dataset write_parquet Scanner
 #' @importFrom arrow to_duckdb as_arrow_table
 #' @importFrom dplyr collect distinct pull summarise summarize rename
 #' @importFrom dplyr mutate select group_by filter bind_rows arrange
@@ -74,6 +74,8 @@ assign("nullptr", new("externalptr"), .global)
 #' - Save and restore
 #'   - [save_ds()]
 #'   - [read_ds()]
+#'   - [write_parquet_ds()]
+#'   - [write_dataset_ds()]
 #'
 #' - Ownership
 #'   - [ownership()]

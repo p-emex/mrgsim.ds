@@ -119,5 +119,16 @@ test_that("write_parquet_ds writes a readable parquet file", {
   expect_equal(result, dplyr::collect(out))
 })
 
+test_that("write_dataset_ds partitions by a column", {
+  doses <- c(100, 200, 400)
+  data <- expand.ev(amt = doses) 
+  data$dose <- data$amt
+  out <- mrgsim_ds(mod, data, carry_out = "dose")
+  dir <- withr::local_tempdir(tmpdir = getwd())
+  write_dataset_ds(out, dir, partitioning = "dose")
+  subdirs <- basename(list.dirs(dir, recursive = FALSE))
+  expect_setequal(subdirs, paste0("dose=", doses))
+})
+
 rm(mod)
 mrgsim.ds:::teardown_ds()

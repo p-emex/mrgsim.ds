@@ -2,18 +2,30 @@
 % Please edit documentation in R/files.R
 \name{write_parquet_ds}
 \alias{write_parquet_ds}
-\title{Write simulations to a single parquet file}
+\alias{write_dataset_ds}
+\title{Write simulations to a parquet file or partitioned dataset}
 \usage{
 write_parquet_ds(x, sink, ...)
+
+write_dataset_ds(x, path, ...)
 }
 \arguments{
 \item{x}{an mrgsimsds object.}
 
 \item{sink}{passed to \code{\link[arrow:write_parquet]{arrow::write_parquet()}}.}
 
-\item{...}{passed to \code{\link[arrow:write_parquet]{arrow::write_parquet()}}.}
+\item{...}{passed to the underlying arrow function.}
+
+\item{path}{passed to \code{\link[arrow:write_dataset]{arrow::write_dataset()}}.}
+}
+\value{
+\code{write_parquet_ds()} returns \code{x} invisibly.
+
+\code{write_dataset_ds()} returns \code{path} invisibly.
 }
 \description{
-Use this function to escape the \code{mrgsim.ds} universe, writing all simulated
-data to a single \code{.parquet} file of your choosing.
+Use these functions to escape the \code{mrgsim.ds} universe. \code{write_parquet_ds()}
+writes all simulated data to a single \code{.parquet} file. \code{write_dataset_ds()}
+writes to a directory, optionally partitioned, via \code{\link[arrow:write_dataset]{arrow::write_dataset()}};
+the caller takes responsibility for the resulting files.
 }
