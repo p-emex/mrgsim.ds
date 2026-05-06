@@ -73,7 +73,7 @@ auto-deleted on garbage collection.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gc_ds</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span>, value <span class="op">=</span> <span class="cn">NULL</span>, notify <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">gc_ds</span><span class="op">(</span><span class="va">x</span>, value <span class="op">=</span> <span class="cn">NULL</span>, notify <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'mrgsimsds'</span></span>
 <span><span class="fu">gc_ds</span><span class="op">(</span><span class="va">x</span>, value <span class="op">=</span> <span class="cn">NULL</span>, notify <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -90,10 +90,6 @@ auto-deleted on garbage collection.</p>
 <dd><p>an mrgsimsds object or a list of objects.</p></dd>
 
 
-<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>not used.</p></dd>
-
-
 <dt id="arg-value">value<a class="anchor" aria-label="anchor" href="#arg-value"></a></dt>
 <dd><p>logical; if <code>TRUE</code> the underlying files will be deleted on
 garbage collection. Passing any value also locks the gc setting so that
@@ -105,6 +101,10 @@ it.</p></dd>
 <dd><p>logical; if <code>TRUE</code> a message will be issued when files are
 deleted on garbage collection. For debugging only; see also the
 <code>mrgsim.ds.show.gc</code> option.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>not used.</p></dd>
 
 </dl></div>
     <div class="section level2">

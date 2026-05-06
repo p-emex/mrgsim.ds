@@ -99,11 +99,11 @@ list_temp()
 ```
 
     ## 10 files [2.9 Mb]
-    ## - mrgsims-ds-1c5317565c49.parquet
-    ## - mrgsims-ds-1c5327fc5d11.parquet
+    ## - mrgsims-ds-1c5520179cf6.parquet
+    ## - mrgsims-ds-1c5530c7c36f.parquet
     ##    ...
-    ## - mrgsims-ds-1c537bdd9b55.parquet
-    ## - mrgsims-ds-1c537dcd421c.parquet
+    ## - mrgsims-ds-1c5576a85edc.parquet
+    ## - mrgsims-ds-1c5596648b3.parquet
 
 To save outputs to a persistent location, use `write_ds()`.
 
@@ -146,4 +146,4 @@ rename_ds(bah, "regimen-1")
 move_ds(bah, save_dir)
 ```
 
-    ## ℹ files are now located in /tmp/Rtmpb3cBJr; gc is off.
+    ## ℹ 10 files are now located in /tmp/RtmpWZPQMX; gc is off.

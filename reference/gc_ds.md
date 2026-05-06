@@ -17,7 +17,7 @@ would then be auto-deleted on garbage collection.
 ## Usage
 
 ``` r
-gc_ds(x, ..., value = NULL, notify = NULL)
+gc_ds(x, value = NULL, notify = NULL, ...)
 
 # S3 method for class 'mrgsimsds'
 gc_ds(x, value = NULL, notify = NULL, ...)
@@ -32,10 +32,6 @@ gc_ds(x, value = NULL, notify = NULL, ...)
 
   an mrgsimsds object or a list of objects.
 
-- ...:
-
-  not used.
-
 - value:
 
   logical; if `TRUE` the underlying files will be deleted on garbage
@@ -49,6 +45,10 @@ gc_ds(x, value = NULL, notify = NULL, ...)
   logical; if `TRUE` a message will be issued when files are deleted on
   garbage collection. For debugging only; see also the
   `mrgsim.ds.show.gc` option.
+
+- ...:
+
+  not used.
 
 ## Value
 
