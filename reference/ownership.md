@@ -70,18 +70,13 @@ check_ownership(out)
 #> [1] TRUE
 
 ownership()
-#> > Objects: 8 | Files: 8 | Size: 146.9 Kb
+#> > Objects: 3 | Files: 3 | Size: 146.9 Kb
 
 list_ownership()
 #>                              file        address
-#> 1 mrgsims-ds-19b764944b2c.parquet 0x55a9a7988a38
-#> 2 mrgsims-ds-19b75464b59c.parquet 0x55a9aad44690
-#> 3 mrgsims-ds-19b712c4e5a9.parquet 0x55a9af955a80
-#> 4 mrgsims-ds-19b73d303732.parquet 0x55a9abb992a0
-#> 5 mrgsims-ds-19b770714c51.parquet 0x55a9b0637dc8
-#> 6 mrgsims-ds-19b74cf67eff.parquet 0x55a9ad62b7f8
-#> 7 mrgsims-ds-19b759f08be2.parquet 0x55a9ab1aedd0
-#> 8  mrgsims-ds-19b7427c0ad.parquet 0x55a9b10c5f48
+#> 1 mrgsims-ds-19b96f14a691.parquet 0x55e14660b4f0
+#> 2 mrgsims-ds-19b93f8d1725.parquet 0x55e1488513a0
+#> 3 mrgsims-ds-19b9120cb6c7.parquet 0x55e14952ff40
 
 e1 <- ev(amt = 100)
 e2 <- ev(amt = 200)
@@ -91,7 +86,7 @@ out <- list(mrgsim_ds(mod, e1), mrgsim_ds(mod, e2))
 sims <- reduce_ds(out)
 
 ownership()
-#> > Objects: 9 | Files: 10 | Size: 200.2 Kb
+#> > Objects: 4 | Files: 5 | Size: 200.2 Kb
 
 check_ownership(sims)
 #> [1] TRUE

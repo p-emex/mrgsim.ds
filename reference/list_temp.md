@@ -2,13 +2,12 @@
 
 Functions for inspecting and cleaning up package-managed parquet files
 in [`tempdir()`](https://rdrr.io/r/base/tempfile.html). `list_temp()`
-shows what is present; `purge_temp()` removes all package-managed files
-unconditionally.
+shows what is present; `purge_temp()` resets the simulation file system.
 
-Note: `purge_temp()` should not be needed in routine usage when
-simulation output objects are subject to the garbage collector. Calling
-it while active objects still point to those files will cause errors on
-next data access.
+`purge_temp()` deletes all package-managed files unconditionally and
+clears the ownership maps, resetting the system to a clean state. It is
+intended for use in testing teardown or session cleanup, not routine
+usage.
 
 ## Usage
 
@@ -22,7 +21,8 @@ purge_temp(quietly = FALSE)
 
 - quietly:
 
-  if `TRUE`, messages will be suppressed.
+  if `TRUE`, suppresses console output (the file listing for
+  `list_temp()` and the deletion summary for `purge_temp()`).
 
 ## Value
 
@@ -40,11 +40,11 @@ out <- lapply(1:10, \(x) mrgsim_ds(mod))
 
 list_temp()
 #> 15 files [143.7 Kb]
-#> - mrgsims-ds-19b711bc572a.parquet
-#> - mrgsims-ds-19b71bbfc4f9.parquet
+#> - mrgsims-ds-19b914de20e.parquet
+#> - mrgsims-ds-19b91d5f587c.parquet
 #>    ...
-#> - mrgsims-ds-19b75f59211c.parquet
-#> - mrgsims-ds-19b764944b2c.parquet
+#> - mrgsims-ds-19b97cf63078.parquet
+#> - mrgsims-ds-19b9dc4df6.parquet
 
 purge_temp()
 #> Discarding 15 files.
