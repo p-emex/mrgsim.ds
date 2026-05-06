@@ -103,7 +103,6 @@ Commonly needed after batch simulation in parallel
 ## Manage simulation outputs in `tempdir()`
 
 - [`list_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
-  [`purge_except_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
   [`purge_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
   : Manage simulated outputs in the per-session temporary directory
 

@@ -309,19 +309,6 @@ list_temp()
 This directory is eventually removed when the R session ends. Tools are
 provided to manage the space.
 
-``` r
-purge_except_temp(out2)
-. Discarding 1 files.
-
-list_temp()
-. 10 files [131.8 Mb]
-. - mrgsims-ds-143de348a522a.parquet
-. - mrgsims-ds-143de43d481a0.parquet
-.    ...
-. - mrgsims-ds-143e228164bf9.parquet
-. - mrgsims-ds-143e24fd5dcfe.parquet
-```
-
 We also put a finalizer on each object so that, when it goes out of
 scope, the files are automatically cleaned up.
 

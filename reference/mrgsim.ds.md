@@ -92,8 +92,6 @@ locations for later use.
 
   - [`list_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
 
-  - [`purge_except_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
-
   - [`purge_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md)
 
 - Enter dplyr / arrow pipelines with
@@ -205,7 +203,7 @@ plot(out, nid = 10)
 
 list_temp()
 #> 1 files [129 Kb]
-#> - mrgsims-ds-19b0743970dc.parquet
+#> - mrgsims-ds-19b74cf67eff.parquet
 
 ownership()
 #> > Objects: 6 | Files: 6 | Size: 129 Kb

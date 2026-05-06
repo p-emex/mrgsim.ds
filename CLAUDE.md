@@ -76,7 +76,7 @@ simulations.
 | `R/verbs.R` | dplyr S3 methods (filter, mutate, summarise, etc.) |
 | `R/reduce.R` | [`reduce_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/reduce_ds.md) — combines a list of outputs |
 | `R/refresh.R` | [`refresh_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/refresh_ds.md) — rebuild Arrow pointer post-fork |
-| `R/temp.R` | [`list_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md), [`purge_except_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md), [`purge_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md) |
+| `R/temp.R` | [`list_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md), [`purge_temp()`](https://kylebaron.github.io/mrgsim.ds/reference/list_temp.md) |
 | `R/gc.R` | [`gc_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/gc_ds.md) — toggle GC/auto-delete and notify flags |
 | `R/prune.R` | [`prune_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/prune_ds.md) — filter a list to only mrgsimsds objects |
 | `R/simlist.R` | Internal helpers for working with lists of mrgsimsds objects |
