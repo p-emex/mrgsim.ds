@@ -56,7 +56,7 @@ Objects track `$pid` (creation process). Arrow Dataset pointers become invalid a
 | `R/verbs.R` | dplyr S3 methods (filter, mutate, summarise, etc.) |
 | `R/reduce.R` | `reduce_ds()` — combines a list of outputs |
 | `R/refresh.R` | `refresh_ds()` — rebuild Arrow pointer post-fork |
-| `R/temp.R` | `list_temp()`, `purge_except_temp()`, `purge_temp()` |
+| `R/temp.R` | `list_temp()`, `purge_temp()` |
 | `R/gc.R` | `gc_ds()` — toggle GC/auto-delete and notify flags |
 | `R/prune.R` | `prune_ds()` — filter a list to only mrgsimsds objects |
 | `R/simlist.R` | Internal helpers for working with lists of mrgsimsds objects |

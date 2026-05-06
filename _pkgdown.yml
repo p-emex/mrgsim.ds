@@ -64,7 +64,6 @@ reference:
 - title: Manage simulation outputs in `tempdir()`
   contents:
   - list_temp
-  - purge_except_temp
   - purge_temp
 - title: Utility functions
   contents:

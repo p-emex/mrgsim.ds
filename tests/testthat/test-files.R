@@ -85,12 +85,6 @@ test_that("temp file helpers", {
   expect_null(x)
   
   expect_silent(purge_temp(quietly = TRUE))
-  out1 <- mrgsim_ds(mod, gc = FALSE)
-  out2 <- mrgsim_ds(mod, gc = FALSE)
-  out3 <- mrgsim_ds(mod, gc = FALSE)
-  f <- c(out1$files, out3$files)  
-  expect_message(purge_except_temp(out1, out3), "Discarding 1 files.")
-
   purge_temp(quietly = TRUE)
   out <- lapply(1:7, \(x) mrgsim_ds(mod))
   devnull <- capture.output(x <- list_temp())
@@ -104,9 +98,6 @@ test_that("temp file helpers", {
   
   expect_length(x <- capture.output(list_temp()), 4)
   expect_silent(list_temp(quietly = TRUE))
-  
-  expect_message(purge_except_temp(out1))
-  expect_silent(purge_except_temp(out2, quietly = TRUE))
 })
 
 test_that("write_parquet_ds writes a readable parquet file", {

@@ -202,13 +202,6 @@ list_temp()
 This directory is eventually removed when the R session ends. Tools are provided
 to manage the space.
 
-```{r}
-purge_except_temp(out2)
-
-list_temp()
-```
-
-
 We also put a finalizer on each object so that, when it goes out of scope, 
 the files are automatically cleaned up. 
 

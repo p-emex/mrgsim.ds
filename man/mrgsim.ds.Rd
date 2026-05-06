@@ -79,7 +79,6 @@ removed prior to object cleanup.
 \item Manage tempdir
 \itemize{
 \item \code{\link[=list_temp]{list_temp()}}
-\item \code{\link[=purge_except_temp]{purge_except_temp()}}
 \item \code{\link[=purge_temp]{purge_temp()}}
 }
 \item Enter dplyr / arrow pipelines with
