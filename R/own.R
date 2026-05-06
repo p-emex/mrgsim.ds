@@ -9,9 +9,7 @@ clear_ownership <- function() {
 }
 
 teardown_ds <- function() {
-  gc()
   purge_temp(quietly = TRUE)
-  clear_ownership()
   unlink(list.files(.global$trashcan, full.names = TRUE))
 }
 

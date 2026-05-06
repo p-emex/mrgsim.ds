@@ -10,7 +10,8 @@ list_temp(quietly = FALSE)
 purge_temp(quietly = FALSE)
 }
 \arguments{
-\item{quietly}{if \code{TRUE}, messages will be suppressed.}
+\item{quietly}{if \code{TRUE}, suppresses console output (the file listing for
+\code{list_temp()} and the deletion summary for \code{purge_temp()}).}
 }
 \value{
 \code{list_temp()} returns a character vector of file paths invisibly, and prints
@@ -21,11 +22,11 @@ a summary to the console unless \code{quietly = TRUE}.
 \description{
 Functions for inspecting and cleaning up package-managed parquet files in
 \code{tempdir()}. \code{list_temp()} shows what is present; \code{purge_temp()}
-removes all package-managed files unconditionally.
+resets the simulation file system.
 
-Note: \code{purge_temp()} should not be needed in routine usage when simulation
-output objects are subject to the garbage collector. Calling it while active
-objects still point to those files will cause errors on next data access.
+\code{purge_temp()} deletes all package-managed files unconditionally and clears
+the ownership maps, resetting the system to a clean state. It is intended
+for use in testing teardown or session cleanup, not routine usage.
 }
 \examples{
 mod <- house_ds()

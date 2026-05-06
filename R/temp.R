@@ -3,13 +3,14 @@
 #' @description
 #' Functions for inspecting and cleaning up package-managed parquet files in
 #' `tempdir()`. `list_temp()` shows what is present; `purge_temp()`
-#' removes all package-managed files unconditionally.
+#' resets the simulation file system.
 #'
-#' Note: `purge_temp()` should not be needed in routine usage when simulation
-#' output objects are subject to the garbage collector. Calling it while active
-#' objects still point to those files will cause errors on next data access.
+#' `purge_temp()` deletes all package-managed files unconditionally and clears
+#' the ownership maps, resetting the system to a clean state. It is intended
+#' for use in testing teardown or session cleanup, not routine usage.
 #'
-#' @param quietly if `TRUE`, messages will be suppressed.
+#' @param quietly if `TRUE`, suppresses console output (the file listing for
+#' `list_temp()` and the deletion summary for `purge_temp()`).
 #'
 #' @return
 #' `list_temp()` returns a character vector of file paths invisibly, and prints
@@ -35,7 +36,7 @@ list_temp <- function(quietly = FALSE) {
     return(invisible(temp))
   }
   if(!length(temp)) {
-    message("No files in tempdir.")
+    cat("No files in tempdir.\n")
     return(invisible(temp))
   }
   size <- total_size(temp)
@@ -58,6 +59,7 @@ list_temp <- function(quietly = FALSE) {
 purge_temp <- function(quietly = FALSE) {
   temp <- list.files(tempdir(), pattern = .global$file.re, full.names = TRUE)
   unlink(x = temp, recursive = TRUE)
+  clear_ownership()
   if(!isTRUE(quietly)) {
     message("Discarding ", length(temp), " files.")
   }
