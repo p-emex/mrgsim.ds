@@ -141,10 +141,10 @@ move_ds(out, "data/sim/regimens")
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://github.com/kylebaron/mrgsim.ds}
-  \item \url{https://kylebaron.github.io/mrgsim.ds/}
-  \item \url{https://kylebaron.r-universe.dev/mrgsim.ds}
-  \item Report bugs at \url{https://github.com/kylebaron/mrgsim.ds/issues}
+  \item \url{https://github.com/p-emex/mrgsim.ds}
+  \item \url{https://p-emex.github.io/mrgsim.ds/}
+  \item \url{https://p-emex.r-universe.dev/mrgsim.ds}
+  \item Report bugs at \url{https://github.com/p-emex/mrgsim.ds/issues}
 }
 
 }
