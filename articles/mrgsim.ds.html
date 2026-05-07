@@ -42,7 +42,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/kylebaron/mrgsim.ds/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/p-emex/mrgsim.ds/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -59,16 +59,16 @@
       <h1>Get Started</h1>
                         <h4 data-toc-skip class="author"></h4>
             
-            <h4 data-toc-skip class="date">2026-05-06</h4>
+            <h4 data-toc-skip class="date">2026-05-07</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/kylebaron/mrgsim.ds/blob/main/vignettes/mrgsim.ds.Rmd" class="external-link"><code>vignettes/mrgsim.ds.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/p-emex/mrgsim.ds/blob/main/vignettes/mrgsim.ds.Rmd" class="external-link"><code>vignettes/mrgsim.ds.Rmd</code></a></small>
       <div class="d-none name"><code>mrgsim.ds.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kylebaron/mrgsim.ds" class="external-link">mrgsim.ds</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/p-emex/mrgsim.ds" class="external-link">mrgsim.ds</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="load-the-model">Load the model<a class="anchor" aria-label="anchor" href="#load-the-model"></a>
@@ -134,11 +134,11 @@ output</p>
 <span></span>
 <span><span class="fu"><a href="../reference/list_temp.html">list_temp</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 10 files [2.9 Mb]</span></span>
-<span><span class="co">## - mrgsims-ds-1c5f109dfff2.parquet</span></span>
-<span><span class="co">## - mrgsims-ds-1c5f1dc95ddf.parquet</span></span>
+<span><span class="co">## - mrgsims-ds-1c6418913f29.parquet</span></span>
+<span><span class="co">## - mrgsims-ds-1c64275dd49f.parquet</span></span>
 <span><span class="co">##    ...</span></span>
-<span><span class="co">## - mrgsims-ds-1c5f67da7e6d.parquet</span></span>
-<span><span class="co">## - mrgsims-ds-1c5f7d6eef8d.parquet</span></span></code></pre>
+<span><span class="co">## - mrgsims-ds-1c647219233e.parquet</span></span>
+<span><span class="co">## - mrgsims-ds-1c64fd53583.parquet</span></span></code></pre>
 <p>To save outputs to a persistent location, use
 <code>write_ds()</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -168,7 +168,7 @@ to <code>save_dir</code>.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/move_ds.html">rename_ds</a></span><span class="op">(</span><span class="va">bah</span>, <span class="st">"regimen-1"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/move_ds.html">move_ds</a></span><span class="op">(</span><span class="va">bah</span>, <span class="va">save_dir</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #0000BB;">ℹ</span> 10 files are now located in /tmp/RtmpvATKIf; gc is off.</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #0000BB;">ℹ</span> 10 files are now located in /tmp/Rtmpmosw2U; gc is off.</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

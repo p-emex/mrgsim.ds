@@ -138,13 +138,13 @@ locations for later use.
 
 Useful links:
 
-- <https://github.com/kylebaron/mrgsim.ds>
+- <https://github.com/p-emex/mrgsim.ds>
 
-- <https://kylebaron.github.io/mrgsim.ds/>
+- <https://p-emex.github.io/mrgsim.ds/>
 
-- <https://kylebaron.r-universe.dev/mrgsim.ds>
+- <https://p-emex.r-universe.dev/mrgsim.ds>
 
-- Report bugs at <https://github.com/kylebaron/mrgsim.ds/issues>
+- Report bugs at <https://github.com/p-emex/mrgsim.ds/issues>
 
 ## Author
 
@@ -203,7 +203,7 @@ plot(out, nid = 10)
 
 list_temp()
 #> 1 files [129 Kb]
-#> - mrgsims-ds-19b96f14a691.parquet
+#> - mrgsims-ds-19bd55f13b92.parquet
 
 ownership()
 #> > Objects: 1 | Files: 1 | Size: 129 Kb
