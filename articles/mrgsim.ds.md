@@ -6,7 +6,22 @@ library(mrgsim.ds)
 library(dplyr)
 ```
 
-## Load the model
+## Overview
+
+`mrgsim.ds` provides an [Apache
+Arrow](https://arrow.apache.org/docs/r/)-backed simulation output object
+for [mrgsolve](https://mrgsolve.org), greatly reducing the memory
+footprint of large simulations and providing a high-performance pipeline
+for summarizing huge simulation outputs. The arrow-based simulation
+output objects in R claim ownership of their files on disk. Those files
+are automatically removed when the owning object goes out of scope and
+becomes subject to the R garbage collector. While “anonymous”,
+parquet-formatted files hold the data in
+[`tempdir()`](https://rdrr.io/r/base/tempfile.html) as you are working
+in R, functions are provided to move this data to more permanent
+locations for later use.
+
+## Load a model
 
 Load a model using
 [`mread_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mread_ds.md)
@@ -35,7 +50,7 @@ These all mimic the corresponding functions in mrgsolve.
 
 To simulate, call
 [`mrgsim_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/mrgsim_ds.md);
-any arguments get passed to
+all arguments get passed to
 [`mrgsim()`](https://mrgsolve.org/docs/reference/mrgsim.html).
 
 ``` r
@@ -319,11 +334,11 @@ list_temp()
 ```
 
     ## 10 files [2.9 Mb]
-    ## - mrgsims-ds-1c6a24ea8c92.parquet
-    ## - mrgsims-ds-1c6a30b06d2c.parquet
+    ## - mrgsims-ds-1bbd10b4be8e.parquet
+    ## - mrgsims-ds-1bbd204e628a.parquet
     ##    ...
-    ## - mrgsims-ds-1c6a756d9c1c.parquet
-    ## - mrgsims-ds-1c6a87afc99.parquet
+    ## - mrgsims-ds-1bbd5dd1b150.parquet
+    ## - mrgsims-ds-1bbd6a9e985.parquet
 
 Or get a list of the files as an R character vector:
 
@@ -332,16 +347,16 @@ Or get a list of the files as an R character vector:
 files_ds(out)
 ```
 
-    ##  [1] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a24ea8c92.parquet"
-    ##  [2] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a30b06d2c.parquet"
-    ##  [3] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a756d9c1c.parquet"
-    ##  [4] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a87afc99.parquet" 
-    ##  [5] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a3d9be597.parquet"
-    ##  [6] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a6ada17be.parquet"
-    ##  [7] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a5bfb3332.parquet"
-    ##  [8] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a52f041c8.parquet"
-    ##  [9] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a7313e01e.parquet"
-    ## [10] "/tmp/Rtmp9uNpgi/mrgsims-ds-1c6a6d8d3f3b.parquet"
+    ##  [1] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd3cb565a2.parquet"
+    ##  [2] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd204e628a.parquet"
+    ##  [3] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd10b4be8e.parquet"
+    ##  [4] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd56a55833.parquet"
+    ##  [5] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd2bd147d7.parquet"
+    ##  [6] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd5dd1b150.parquet"
+    ##  [7] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd2fde8bb0.parquet"
+    ##  [8] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd6a9e985.parquet" 
+    ##  [9] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd29263da7.parquet"
+    ## [10] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd32f1529f.parquet"
 
 To save outputs to a persistent location, use
 [`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md).
@@ -385,7 +400,7 @@ rename_ds(bah, "regimen-1")
 move_ds(bah, save_dir)
 ```
 
-    ## ℹ 10 files are now located in /tmp/Rtmp9uNpgi; gc is off.
+    ## ℹ 10 files are now located in /tmp/RtmpCw7sHd; gc is off.
 
 If you want all the simulated data output in a single parquet file that
 you name and locate.
@@ -447,8 +462,8 @@ gc()
 ```
 
     ##           used  (Mb) gc trigger (Mb) max used  (Mb)
-    ## Ncells 2025431 108.2    4024015  215  4024015 215.0
-    ## Vcells 3761309  28.7    8388608   64  6396854  48.9
+    ## Ncells 2025442 108.2    4024487  215  4024487 215.0
+    ## Vcells 3761556  28.7    8388608   64  6397226  48.9
 
 ``` r
 
@@ -473,8 +488,8 @@ gc()
 ```
 
     ##           used  (Mb) gc trigger (Mb) max used  (Mb)
-    ## Ncells 2024824 108.2    4024015  215  4024015 215.0
-    ## Vcells 3755284  28.7    8388608   64  6396854  48.9
+    ## Ncells 2024835 108.2    4024487  215  4024487 215.0
+    ## Vcells 3755531  28.7    8388608   64  6397226  48.9
 
 ``` r
 [mrgsim.ds] cleaning up 1 file(s) ...
