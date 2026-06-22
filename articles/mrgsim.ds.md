@@ -224,9 +224,9 @@ out %>%
     ## # A tibble: 3 × 5
     ##    dose    P5  Mean Median   P95
     ##   <dbl> <dbl> <dbl>  <dbl> <dbl>
-    ## 1   100  2.03  3.39   3.42  4.97
-    ## 2   700  7.93 18.6   16.8  35.8 
-    ## 3   300  6.74 10.6   10.3  15.5
+    ## 1   300  6.74 10.6   10.3  15.5 
+    ## 2   100  2.03  3.39   3.42  4.97
+    ## 3   700  7.93 18.6   16.8  35.8
 
 If you only want to get your simulated data as an R data frame, simply
 coerce to `tibble`.
@@ -334,11 +334,11 @@ list_temp()
 ```
 
     ## 10 files [2.9 Mb]
-    ## - mrgsims-ds-1bbd10b4be8e.parquet
-    ## - mrgsims-ds-1bbd204e628a.parquet
+    ## - mrgsims-ds-1d0d15c0a70f.parquet
+    ## - mrgsims-ds-1d0d207a511d.parquet
     ##    ...
-    ## - mrgsims-ds-1bbd5dd1b150.parquet
-    ## - mrgsims-ds-1bbd6a9e985.parquet
+    ## - mrgsims-ds-1d0d67914c12.parquet
+    ## - mrgsims-ds-1d0d6d755feb.parquet
 
 Or get a list of the files as an R character vector:
 
@@ -347,16 +347,16 @@ Or get a list of the files as an R character vector:
 files_ds(out)
 ```
 
-    ##  [1] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd3cb565a2.parquet"
-    ##  [2] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd204e628a.parquet"
-    ##  [3] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd10b4be8e.parquet"
-    ##  [4] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd56a55833.parquet"
-    ##  [5] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd2bd147d7.parquet"
-    ##  [6] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd5dd1b150.parquet"
-    ##  [7] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd2fde8bb0.parquet"
-    ##  [8] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd6a9e985.parquet" 
-    ##  [9] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd29263da7.parquet"
-    ## [10] "/tmp/RtmpCw7sHd/mrgsims-ds-1bbd32f1529f.parquet"
+    ##  [1] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d3b3a4654.parquet"
+    ##  [2] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d6d755feb.parquet"
+    ##  [3] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d207a511d.parquet"
+    ##  [4] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d25e93f16.parquet"
+    ##  [5] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d15c0a70f.parquet"
+    ##  [6] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d67914c12.parquet"
+    ##  [7] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d20a2638.parquet" 
+    ##  [8] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d23303e75.parquet"
+    ##  [9] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d3e9baeab.parquet"
+    ## [10] "/tmp/RtmpTI2bWQ/mrgsims-ds-1d0d573fcfb3.parquet"
 
 To save outputs to a persistent location, use
 [`save_ds()`](https://kylebaron.github.io/mrgsim.ds/reference/save_ds.md).
@@ -400,7 +400,7 @@ rename_ds(bah, "regimen-1")
 move_ds(bah, save_dir)
 ```
 
-    ## ℹ 10 files are now located in /tmp/RtmpCw7sHd; gc is off.
+    ## ℹ 10 files are now located in /tmp/RtmpTI2bWQ; gc is off.
 
 If you want all the simulated data output in a single parquet file that
 you name and locate.
@@ -461,9 +461,9 @@ rm(out)
 gc()
 ```
 
-    ##           used  (Mb) gc trigger (Mb) max used  (Mb)
-    ## Ncells 2025442 108.2    4024487  215  4024487 215.0
-    ## Vcells 3761556  28.7    8388608   64  6397226  48.9
+    ##           used  (Mb) gc trigger  (Mb) max used  (Mb)
+    ## Ncells 2030219 108.5    4081102 218.0  3484473 186.1
+    ## Vcells 4464681  34.1   10146329  77.5  6455197  49.3
 
 ``` r
 
@@ -487,9 +487,9 @@ rm(out)
 gc()
 ```
 
-    ##           used  (Mb) gc trigger (Mb) max used  (Mb)
-    ## Ncells 2024835 108.2    4024487  215  4024487 215.0
-    ## Vcells 3755531  28.7    8388608   64  6397226  48.9
+    ##           used  (Mb) gc trigger  (Mb) max used  (Mb)
+    ## Ncells 2026949 108.3    4081102 218.0  3484473 186.1
+    ## Vcells 3732836  28.5   10146329  77.5  6455197  49.3
 
 ``` r
 [mrgsim.ds] cleaning up 1 file(s) ...

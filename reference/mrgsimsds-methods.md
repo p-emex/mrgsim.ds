@@ -5,7 +5,7 @@ Basic S3 methods for inspecting and plotting mrgsimsds objects:
 [`head()`](https://rdrr.io/r/utils/head.html),
 [`tail()`](https://rdrr.io/r/utils/head.html),
 [`names()`](https://rdrr.io/r/base/names.html), and
-[`plot()`](https://rdrr.io/r/graphics/plot.default.html).
+[`plot()`](https://mrgsolve.org/docs/reference/plot_mrgsims.html).
 
 ## Usage
 
@@ -85,8 +85,8 @@ plot(
 - [`names()`](https://rdrr.io/r/base/names.html): character vector of
   column names.
 
-- [`plot()`](https://rdrr.io/r/graphics/plot.default.html): a plot
-  object, returned invisibly.
+- [`plot()`](https://mrgsolve.org/docs/reference/plot_mrgsims.html): a
+  plot object, returned invisibly.
 
 ## Details
 
